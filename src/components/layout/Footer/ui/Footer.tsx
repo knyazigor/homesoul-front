@@ -14,12 +14,10 @@ export const Footer = () => {
     <footer className={styles.footer}>
       <div className="container">
         <div className={styles.footerContent}>
-          {/* Основная информация */}
           <div className={styles.copyright}>
             <p>© {currentYear} Квашнина Полина Владимировна</p>
           </div>
 
-          {/* Ссылки */}
           <div className={styles.links}>
             <Link
               href="/privacy-policy"
@@ -29,9 +27,16 @@ export const Footer = () => {
             >
               Политика конфиденциальности
             </Link>
+            <Link
+              href="/privacy-policy"
+              className={`${styles.link} ${
+                pathname === "/personal-data-policy" ? styles.active : ""
+              }`}
+            >
+              Политика обработки персональных данных
+            </Link>
           </div>
 
-          {/* Контактная информация с иконками */}
           <div className={styles.contacts}>
             <div className={styles.contactItem}>
               <Phone size={18} className={styles.contactIcon} />
@@ -54,10 +59,8 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Разделитель */}
         <div className={styles.divider} />
 
-        {/* Нижняя часть */}
         <div className={styles.bottom}>
           <p className={styles.rights}>
             Все права защищены. Любое копирование материалов сайта без

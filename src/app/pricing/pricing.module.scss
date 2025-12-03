@@ -1,0 +1,109 @@
+@use '@/styles/variables' as v;
+
+.pricingPage {
+  min-height: 100vh;
+  background: v.$background;  
+  
+  @media (max-width: v.$tablet) {
+    padding-top: 70px;
+  }
+}
+
+.pricingHero {
+  width: 100%;
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  max-height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+  @media (max-width: v.$tablet) {
+    margin-top: -70px;
+    height: 60vh;
+    min-height: 400px;
+  }
+  
+  @media (max-width: v.$mobile) {
+    height: 50vh;
+    min-height: 400px;
+  }
+}
+
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroGradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+  180deg,
+  darken(v.$primary, 20%) 0%,
+  v.$accent 100%
+);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;  
+  color: white;
+}
+
+.heroText {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  font-family: v.$font-primary;
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;  
+  color: rgba(255, 255, 255, 0.9);
+  
+  @media (max-width: v.$tablet) {
+    font-size: 3rem;
+  }
+  
+  @media (max-width: v.$mobile) {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  color: v.$background;
+  
+  @media (max-width: v.$tablet) {
+    font-size: 1.25rem;
+  }
+  
+  @media (max-width: v.$mobile) {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.heroButtonsContainer {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  align-items: center;
+}
+
+.pricingMain {
+  min-height: 100vh;
+}

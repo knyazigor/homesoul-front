@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styles from "./page.module.scss";
-import { Footer, Header } from "@/components/layout";
 import { Hero } from "@/components/sections";
 import { Portfolio } from "@/components/sections/Portfolio/ui/Portfolio";
 import { getMainPagePortfolioProjects } from "@/actions/portfolio";
@@ -9,7 +8,6 @@ export default async function Home() {
   const projects = await getMainPagePortfolioProjects();
   return (
     <>
-      <Header />
       <div className={styles.page}>
         <Hero />
 
@@ -43,8 +41,6 @@ export default async function Home() {
           </div>
         </section>
         <Portfolio projects={projects} />
-
-        <Footer />
       </div>
     </>
   );

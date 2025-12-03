@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Footer, Header } from "@/components/layout";
 import { PortfolioGrid } from "@/components/entities/Portfolio/PortfolioGrid";
 import { getAllPortfolioProjects } from "@/actions/portfolio";
 import styles from "./portfolio.module.scss";
@@ -8,7 +7,7 @@ import { OverlapContainer } from "@/components/ui";
 import { ScrollToButton } from "@/components/ui/ScrollToButton/ScrollToButton";
 
 export const metadata: Metadata = {
-  title: "Портфолио | Дизайн интерьеров",
+  title: "Портфолио | Душа вашего дома",
   description:
     "Все проекты дизайнера интерьеров. Реализованные работы в различных стилях для квартир, домов и коммерческих помещений.",
 };
@@ -18,7 +17,6 @@ export default async function PortfolioPage() {
 
   return (
     <>
-      <Header />
       <main className={styles.portfolioPage}>
         <section className={styles.portfolioHero}>
           <div className={styles.heroBackground}>
@@ -63,7 +61,6 @@ export default async function PortfolioPage() {
             </div>
           </div>
         </section>
-        <Footer />
       </main>
     </>
   );
