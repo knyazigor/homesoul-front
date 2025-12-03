@@ -5,7 +5,6 @@
   min-height: 100vh;
   display: flex;
   overflow: hidden;
-  
 }
 
 .heroBackground {
@@ -35,22 +34,33 @@
   z-index: 2;
   opacity: 0.9;
   pointer-events: none;
-  width: min(300px, 30vw);
+  width: min(500px, 50vw); /* Увеличил базовый размер */
   height: auto;
   
   @media (max-width: v.$tablet) {
-    width: min(300px, 40vw);
+    width: min(400px, 60vw); /* Увеличил для планшетов */
   }
   
   @media (max-width: v.$mobile) {
-    width: min(250px, 50vw);
+    width: min(350px, 70vw); /* Увеличил для мобильных */
+  }
+  
+  /* Для вертикальных мобильных с достаточной высотой */
+  @media (max-width: v.$mobile) and (min-height: 600px) {
+    width: min(400px, 75vw);
+  }
+  
+  /* Для очень маленьких экранов по высоте */
+  @media (max-width: v.$mobile) and (max-height: 500px) {
+    width: min(250px, 60vw);
+    top: 45%; /* Поднимаем выше */
   }
 }
 
-/* Контейнер для кнопок - ПОДНЯТ ВЫШЕ */
+/* Контейнер для кнопок */
 .heroBottom {
   position: absolute;
-  bottom: 8vh; 
+  bottom: 8vh;
   left: 0;
   width: 100%;
   z-index: 3;
@@ -58,13 +68,18 @@
   animation: heroFadeIn 1s ease-out 0.3s both;
 
   @media (max-width: v.$tablet) {
-    bottom: 4vh;
-    padding: 1rem 0;
+    bottom: 6vh; /* Увеличил для планшетов */
+    padding: 2rem 0;
   }
 
   @media (max-width: v.$mobile) {
-    bottom: 3vh;
-    padding: 1rem 0;
+    bottom: 5vh; /* Увеличил для мобильных */
+    padding: 1.5rem 0;
+  }
+  
+  /* Для вертикальных мобильных с достаточной высотой */
+  @media (max-width: v.$mobile) and (min-height: 700px) {
+    bottom: 8vh;
   }
 }
 
@@ -88,55 +103,71 @@
     gap: 1rem;
     padding: 0 1rem;
     
+    /* Для вертикальных мобильных с достаточной шириной */
+    @media (min-width: 400px) {
+      gap: 1.5rem;
+    }
   }
 }
 
-/* Старые стили кнопок (удалите если используете компонент Button) */
-.primary, .secondary {
-  padding: 1rem 2.5rem;
-  border-radius: 4px;
-  border: none;
-  font-family: v.$font-secondary;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  min-width: 200px;
-  backdrop-filter: blur(10px);
-
+/* Альтернативный вариант - использовать фиксированные размеры с медиазапросами */
+.heroLogoFixed {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  opacity: 0.9;
+  pointer-events: none;
+  
+  /* Десктоп */
+  width: 500px;
+  height: 500px;
+  
+  @media (max-width: 1200px) {
+    width: 450px;
+    height: 450px;
+  }
+  
+  @media (max-width: v.$tablet) {
+    width: 400px;
+    height: 400px;
+  }
+  
   @media (max-width: v.$mobile) {
-    width: 100%;
-    max-width: 280px;
-    min-width: auto;
+    width: 350px;
+    height: 350px;
+  }
+  
+  /* Для вертикальных мобильных с достаточной высотой */
+  @media (max-width: v.$mobile) and (min-height: 700px) {
+    width: 380px;
+    height: 380px;
+  }
+  
+  /* Для маленьких мобильных */
+  @media (max-width: 400px) {
+    width: 280px;
+    height: 280px;
   }
 }
 
-.primary {
-  background: rgba(v.$surface, 0.95);
-  color: v.$accent;
-  border: 2px solid rgba(v.$surface, 0.95);
-
-  &:hover {
-    background: transparent;
-    color: v.$surface;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(v.$surface, 0.3);
-  }
-}
-
-.secondary {
-  background: transparent;
-  color: v.$surface;
-  border: 2px solid rgba(v.$surface, 0.8);
-
-  &:hover {
-    background: rgba(v.$surface, 0.95);
-    color: v.$accent;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(v.$surface, 0.3);
+/* Еще один вариант - использовать vmin (процент от меньшей стороны) */
+.heroLogoVmin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  opacity: 0.9;
+  pointer-events: none;
+  width: 70vmin; /* 70% от меньшей стороны (ширины или высоты) */
+  height: auto;
+  max-width: 500px; /* Максимальный размер */
+  min-width: 280px; /* Минимальный размер */
+  
+  @media (max-width: v.$mobile) {
+    width: 75vmin;
   }
 }
 

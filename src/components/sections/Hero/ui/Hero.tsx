@@ -19,16 +19,31 @@ export const Hero = () => {
         <div className={styles.heroOverlay}></div>
       </div>
 
-      {/* Логотип по центру */}
-      <div className={styles.heroLogo}>
+      {/* Логотип по центру - вариант с vmin */}
+      <div className={styles.heroLogoVmin}>
+        <div className="hero-logo-wrapper">
+          <Image
+            src="/images/hero/hero-logo.svg"
+            alt="Логотип"
+            width={400}
+            height={400}
+            priority
+            style={{ width: "100%", height: "auto" }}
+          />
+        </div>
+      </div>
+
+      {/* Или вариант с фиксированными размерами */}
+      {/* <div className={styles.heroLogoFixed}>
         <Image
           src="/images/hero/hero-logo.svg"
           alt="Логотип"
-          width={300}
-          height={300}
+          width={400}
+          height={400}
           priority
+          style={{ width: '100%', height: '100%' }}
         />
-      </div>
+      </div> */}
 
       {/* Кнопки выше */}
       <div className={styles.heroBottom}>
