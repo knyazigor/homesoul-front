@@ -60,11 +60,11 @@
 /* Контейнер для кнопок */
 .heroBottom {
   position: absolute;
-  bottom: 8vh;
+  bottom: 6vh;
   left: 0;
   width: 100%;
   z-index: 3;
-  padding: 3rem 0;
+  padding: 0;
   animation: heroFadeIn 1s ease-out 0.3s both;
 
   @media (max-width: v.$tablet) {
@@ -121,28 +121,28 @@
   pointer-events: none;
   
   /* Десктоп */
-  width: 500px;
-  height: 500px;
+  width: 350px;
+  height: 350px;
   
   @media (max-width: 1200px) {
-    width: 450px;
-    height: 450px;
-  }
-  
-  @media (max-width: v.$tablet) {
-    width: 400px;
-    height: 400px;
-  }
-  
-  @media (max-width: v.$mobile) {
     width: 350px;
     height: 350px;
   }
   
+  @media (max-width: v.$tablet) {
+    width: 350px;
+    height: 350px;
+  }
+  
+  @media (max-width: v.$mobile) {
+    width: 300px;
+    height: 300px;
+  }
+  
   /* Для вертикальных мобильных с достаточной высотой */
   @media (max-width: v.$mobile) and (min-height: 700px) {
-    width: 380px;
-    height: 380px;
+    width: 350px;
+    height: 350px;
   }
   
   /* Для маленьких мобильных */
@@ -163,7 +163,7 @@
   pointer-events: none;
   width: 70vmin; /* 70% от меньшей стороны (ширины или высоты) */
   height: auto;
-  max-width: 500px; /* Максимальный размер */
+  max-width: 350px; /* Максимальный размер */
   min-width: 280px; /* Минимальный размер */
   
   @media (max-width: v.$mobile) {
