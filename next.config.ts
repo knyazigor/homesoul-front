@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: [
+      "api-homesoul.ufatitan.ru", // Ваш Strapi домен
+      "localhost", // Для разработки
+      "127.0.0.1", // Для разработки
+    ],
+    formats: ["image/webp", "image/avif"], // Поддержка современных форматов
+  },
 };
 
 export default nextConfig;

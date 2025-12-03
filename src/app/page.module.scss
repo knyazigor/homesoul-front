@@ -1,0 +1,202 @@
+@use '../styles/variables' as v;
+
+.page {
+  min-height: 100vh;
+  font-family: v.$font-secondary;
+  background-color: v.$background;
+}
+
+/* О себе */
+.about {
+  padding: 6rem 0;
+  background: v.$background;
+}
+
+.aboutContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  @media (max-width: v.$tablet) {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+.aboutText h2 {
+  font-family: v.$font-primary;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: v.$accent;
+}
+
+.aboutText p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: v.$text-light;
+  margin-bottom: 2rem;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: v.$text-dark;
+
+    &::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: v.$primary;
+      font-weight: bold;
+    }
+  }
+}
+
+.aboutImage {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Услуги */
+.services {
+  padding: 6rem 0;
+  background: v.$surface;
+}
+
+.services h2 {
+  font-family: v.$font-primary;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: v.$accent;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.serviceCard {
+  padding: 2.5rem 2rem;
+  background: v.$background;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid v.$border;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.serviceIcon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.serviceCard h3 {
+  font-family: v.$font-primary;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: v.$accent;
+}
+
+.serviceCard p {
+  color: v.$text-light;
+  line-height: 1.6;
+}
+
+/* CTA секция */
+.cta {
+  padding: 6rem 0;
+  background: v.$primary;
+  color: white;
+  text-align: center;
+}
+
+.ctaContent h2 {
+  font-family: v.$font-primary;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.ctaContent p {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaForm {
+  display: flex;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+
+  @media (max-width: v.$mobile) {
+    flex-direction: column;
+  }
+}
+
+.formInput {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  border: none;
+  font-family: v.$font-secondary;
+  font-size: 1rem;
+
+  &::placeholder {
+    color: v.$text-light;
+  }
+}
+
+/* Общие стили кнопок */
+.primary, .secondary {
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  border: none;
+  font-family: v.$font-secondary;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.primary {
+  background: v.$primary;
+  color: white;
+
+  &:hover {
+    background: v.$primary-dark;
+    transform: translateY(-2px);
+  }
+}
+
+.secondary {
+  background: transparent;
+  color: v.$text-dark;
+  border: 1px solid v.$border;
+
+  &:hover {
+    background: v.$secondary;
+    border-color: v.$primary;
+    color: v.$primary;
+  }
+}

@@ -1,0 +1,320 @@
+@use '@/styles/variables' as v;
+
+.pricing {
+  padding: 6rem 0;
+  background: v.$background;
+
+  @media (max-width: v.$tablet) {
+    padding: 4rem 0;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem; // Уменьшим отступ
+
+  h2 {
+    font-family: v.$font-primary;
+    font-size: 2.5rem;
+    color: v.$accent;
+    margin-bottom: 1rem;
+
+    @media (max-width: v.$mobile) {
+      font-size: 2rem;
+    }
+  }
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: v.$text-light;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.pricingContainer {
+  overflow: visible;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.pricingGrid {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem 0.5rem 3rem; // Увеличим нижний отступ для скроллбара
+  scrollbar-width: thin;
+  scrollbar-color: v.$primary v.$secondary;
+  
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: v.$secondary;
+    border-radius: 4px;
+    margin: 0 0.5rem;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: v.$primary;
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: darken(v.$primary, 10%);
+  }
+
+  @media (max-width: v.$tablet) {
+    padding: 1rem 1rem 3rem;
+  }
+}
+
+.pricingCard {
+  flex: 0 0 320px;
+  background: v.$surface;
+  border: 1px solid v.$border;
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(v.$accent, 0.1);
+  }
+
+  &.recommended {
+    border: 2px solid v.$primary;
+    background: linear-gradient(135deg, v.$surface 0%, rgba(v.$primary, 0.03) 100%);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(135deg, v.$primary, rgba(v.$primary, 0.3));
+      border-radius: 14px;
+      z-index: -1;
+    }
+  }
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem 1.5rem;
+}
+
+.recommendedBadge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: v.$primary;
+  color: v.$surface;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid v.$border;
+
+  h3 {
+    font-family: v.$font-primary;
+    font-size: 1.25rem;
+    color: v.$accent;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    min-height: 3.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: v.$primary;
+  font-family: v.$font-secondary;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  flex-grow: 1;
+
+  li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: v.$text-dark;
+    line-height: 1.5;
+    font-size: 0.9rem;
+
+    &::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: v.$primary;
+      font-weight: bold;
+    }
+  }
+
+  .nestedItem {
+    padding-left: 2rem;
+    font-size: 0.85rem;
+    color: v.$text-light;
+    
+    &::before {
+      content: '•';
+      color: v.$text-light;
+    }
+  }
+}
+
+.cardFooter {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.ctaButton {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-family: v.$font-secondary;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary {
+  background: v.$primary;
+  color: v.$surface;
+
+  &:hover {
+    background: darken(v.$primary, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(v.$primary, 0.3);
+  }
+}
+
+.secondary {
+  background: transparent;
+  color: v.$primary;
+  border: 2px solid v.$primary;
+
+  &:hover {
+    background: v.$primary;
+    color: v.$surface;
+    transform: translateY(-2px);
+  }
+}
+
+.footer {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid v.$border;
+
+  p {
+    color: v.$text-light;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+/* Анимации */
+.pricingCard {
+  animation: fadeInUp 0.6s ease-out;
+  
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Улучшение для touch устройств */
+@media (hover: none) and (pointer: coarse) {
+  .pricingCard:hover {
+    transform: none;
+  }
+  
+  .ctaButton:hover {
+    transform: none;
+  }
+}
+
+/* Альтернативные варианты подсказки о скролле */
+
+/* Вариант 1: Подсказка над контейнером (рекомендуется) */
+.scrollHint {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: v.$text-light;
+  opacity: 0.8;
+  
+  @media (max-width: v.$tablet) {
+    display: none; // На мобильных скрываем, так как скролл очевиден
+  }
+}
+
+/* Вариант 2: Индикатор справа (более discreet) */
+.scrollIndicator {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: v.$text-light;
+  font-size: 1.5rem;
+  opacity: 0.6;
+  animation: bounceHorizontal 2s infinite;
+  pointer-events: none;
+  
+  @media (max-width: v.$tablet) {
+    display: none;
+  }
+}
+
+@keyframes bounceHorizontal {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(-50%) translateX(0);
+  }
+  40% {
+    transform: translateY(-50%) translateX(-5px);
+  }
+  60% {
+    transform: translateY(-50%) translateX(-3px);
+  }
+}

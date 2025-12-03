@@ -1,0 +1,47 @@
+@use '@/styles/variables' as v;
+
+.portfolioGridSection {
+  padding: 4rem 0;
+  background: v.$background;
+
+  @media (max-width: v.$tablet) {
+    padding: 3rem 0;
+  }
+
+  @media (max-width: v.$mobile) {
+    padding: 2rem 0;
+  }
+}
+
+.portfolioGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  
+  @media (max-width: v.$tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: v.$mobile) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  
+  h2 {
+    font-family: v.$font-primary;
+    font-size: 2rem;
+    color: v.$accent;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    color: v.$text-light;
+    font-size: 1.125rem;
+  }
+}

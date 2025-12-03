@@ -1,66 +1,75 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
+import { Header } from "@/components/layout";
+import { Hero } from "@/components/sections";
+import { Portfolio } from "@/components/sections/Portfolio/ui/Portfolio";
+import { getMainPagePortfolioProjects } from "@/actions/portfolio";
 
-export default function Home() {
+export default async function Home() {
+  const projects = await getMainPagePortfolioProjects();
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <Header />
+      <div className={styles.page}>
+        <Hero />
+
+        {/* О себе */}
+        <section className={styles.about}>
+          <div className="container">
+            <div className={styles.aboutContent}>
+              <div className={styles.aboutText}>
+                <h2>Обо мне</h2>
+                <p>
+                  Я профессиональный дизайнер интерьеров с 8-летним опытом.
+                  Специализируюсь на создании элегантных и функциональных
+                  пространств для частных клиентов и коммерческих проектов.
+                </p>
+                <ul className={styles.features}>
+                  <li>Более 50 реализованных проектов</li>
+                  <li>Индивидуальный подход к каждому клиенту</li>
+                  <li>Полное сопровождение от концепции до реализации</li>
+                </ul>
+              </div>
+              <div className={styles.aboutImage}>
+                <Image
+                  src="/images/about/designer-portrait.jpg"
+                  alt="Дизайнер"
+                  width={640}
+                  height={640}
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Услуги */}
+        {/* <Pricing /> */}
+
+        {/* Портфолио */}
+        <Portfolio projects={projects} />
+        {/* CTA секция */}
+        <section className={styles.cta}>
+          <div className="container">
+            <div className={styles.ctaContent}>
+              <h2>Готовы преобразить ваше пространство?</h2>
+              <p>
+                Запишитесь на бесплатную консультацию и мы обсудим ваш проект
+              </p>
+              <form className={styles.ctaForm}>
+                <input
+                  type="tel"
+                  placeholder="Ваш телефон"
+                  className={styles.formInput}
+                />
+                <button type="submit" className={styles.primary}>
+                  Записаться на консультацию
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

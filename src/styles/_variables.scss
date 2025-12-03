@@ -1,0 +1,24 @@
+// Colors
+$primary: rgb(100, 122, 109);      // Основной акцентный цвет
+$primary-dark: #4A5D52; // Темный оттенок primary
+$secondary: #BFC1C0;    // Вторичный цвет, нейтральный
+$accent: #040605;       // Акцент для текста и важных элементов
+$background: #FDFDFD;   // Основной фон
+$surface: #FFFFFF;      // Поверхности, карточки
+$text-dark: #1A1D1A;    // Основной текст
+$text-light: #5A5F5C;   // Вторичный текст
+$border: #E8E9E8;       // Границы
+
+// Fonts
+$font-primary: 'Cormorant Garamond', serif;
+$font-secondary: 'Nunito Sans', sans-serif;
+
+// Breakpoints
+$mobile: 768px;
+$tablet: 1024px;
+$desktop: 1280px;
+
+// Spacing
+$section-padding: 5rem 0;
+$section-padding-tablet: 4rem 0;
+$section-padding-mobile: 3rem 0;

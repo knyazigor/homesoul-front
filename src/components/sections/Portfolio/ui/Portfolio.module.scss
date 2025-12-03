@@ -1,0 +1,62 @@
+@use '@/styles/variables' as v;
+
+/* Портфолио */
+.portfolio {
+  padding: 6rem 0;
+  background: v.$background;
+}
+
+.portfolio h2 {
+  font-family: v.$font-primary;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: v.$accent;
+}
+
+.portfolioGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.portfolioItem {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.portfolioInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(v.$accent, 0.8));
+  color: white;
+  padding: 2rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+
+  .portfolioItem:hover & {
+    transform: translateY(0);
+  }
+}
+
+.portfolioInfo h4 {
+  font-family: v.$font-primary;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.portfolioInfo span {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+

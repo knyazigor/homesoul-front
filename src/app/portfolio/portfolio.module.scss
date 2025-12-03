@@ -1,0 +1,214 @@
+@use '@/styles/variables' as v;
+
+.portfolioPage {
+  min-height: 100vh;
+  background: v.$background;  
+  
+  @media (max-width: v.$tablet) {
+    padding-top: 70px;
+  }
+}
+
+.portfolioHero {
+  width: 100%;
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  max-height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+  @media (max-width: v.$tablet) {
+    margin-top: -70px;
+    height: 60vh;
+    min-height: 400px;
+  }
+  
+  @media (max-width: v.$mobile) {
+    height: 50vh;
+    min-height: 350px;
+  }
+}
+
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroGradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+  180deg,
+  darken(v.$primary, 20%) 0%,
+  v.$accent 100%
+);
+  
+ 
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;  
+  color: white;
+}
+
+.heroText {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.heroTitle {
+  font-family: v.$font-primary;
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;  
+  color: rgba(255, 255, 255, 0.9);
+  
+  @media (max-width: v.$tablet) {
+    font-size: 3rem;
+  }
+  
+  @media (max-width: v.$mobile) {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  color: v.$background;
+  
+  @media (max-width: v.$tablet) {
+    font-size: 1.25rem;
+  }
+  
+  @media (max-width: v.$mobile) {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.heroButtonsContainer {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  align-items: center;
+  // justify-content: center; 
+}
+
+.portfolioStats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.125rem;
+  color: v.$background;
+  
+  @media (max-width: v.$mobile) {
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1rem;
+  }
+}
+
+.portfolioProjectsContainer {
+  position: relative;
+  top: -2rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  background: v.$background; 
+  z-index: 3; 
+  margin-bottom: -2rem; 
+  padding-top: 2rem; 
+}
+
+/* Стили для CTA секции */
+.portfolioCta {
+  padding: 6rem 0;
+  background: v.$surface;
+  
+  @media (max-width: v.$tablet) {
+    padding: 4rem 0;
+  }
+}
+
+.portfolioCtaContent {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  
+  h2 {
+    font-family: v.$font-primary;
+    font-size: 2.5rem;
+    color: v.$accent;
+    margin-bottom: 1rem;
+    
+    @media (max-width: v.$tablet) {
+      font-size: 2rem;
+    }
+  }
+  
+  p {
+    font-size: 1.125rem;
+    color: v.$text-light;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+}
+
+.portfolioCtaActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  
+  &.primary {
+    background: v.$primary;
+    color: v.$surface;
+    
+    &:hover {
+      background: darken(v.$primary, 10%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+  
+  &.secondary {
+    background: transparent;
+    color: v.$primary;
+    border: 2px solid v.$primary;
+    
+    &:hover {
+      background: v.$primary;
+      color: v.$surface;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+  
+  @media (max-width: v.$mobile) {
+    width: 100%;
+    text-align: center;
+  }
+}
