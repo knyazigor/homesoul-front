@@ -12,6 +12,7 @@ RUN npm ci
 
 # Копируем исходный код
 COPY . .
+COPY .env* ./
 
 # Собираем приложение
 RUN npm run build

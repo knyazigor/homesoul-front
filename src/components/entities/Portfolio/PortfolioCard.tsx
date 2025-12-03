@@ -21,7 +21,7 @@ export const PortfolioCard = ({
   showMeta = false,
   className = "",
 }: PortfolioCardProps) => {
-  const { title, subtitle, cover, images } = project;
+  const { title, /* subtitle , */ cover, images } = project;
   const imageUrl = getOptimizedImageUrl(cover);
   const altText = getImageAltText(cover);
 
@@ -49,7 +49,7 @@ export const PortfolioCard = ({
           <div className={styles.content}>
             <header className={styles.header}>
               <h3 className={styles.title}>{title}</h3>
-              {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+              {/* {subtitle && <p className={styles.subtitle}>{subtitle}</p>} */}
             </header>
 
             {showMeta && (
