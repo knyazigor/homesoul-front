@@ -4,16 +4,8 @@
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
   overflow: hidden;
-
-  @media (max-width: v.$tablet) {
-    min-height: 80vh;
-  }
-
-  @media (max-width: v.$mobile) {
-    min-height: 70vh;
-  }
+  
 }
 
 .heroBackground {
@@ -35,65 +27,71 @@
   z-index: 2;
 }
 
-.heroContent {
-  position: relative;
+.heroLogo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  opacity: 0.9;
+  pointer-events: none;
+  width: min(300px, 30vw);
+  height: auto;
+  
+  @media (max-width: v.$tablet) {
+    width: min(300px, 40vw);
+  }
+  
+  @media (max-width: v.$mobile) {
+    width: min(250px, 50vw);
+  }
+}
+
+/* Контейнер для кнопок - ПОДНЯТ ВЫШЕ */
+.heroBottom {
+  position: absolute;
+  bottom: 8vh; 
+  left: 0;
+  width: 100%;
   z-index: 3;
-  max-width: 600px;
-  color: v.$surface;
-  padding: 2rem 0;
+  padding: 3rem 0;
+  animation: heroFadeIn 1s ease-out 0.3s both;
 
   @media (max-width: v.$tablet) {
-    max-width: 500px;
-    text-align: center;
-    margin: 0 auto;
-  }
-}
-
-.heroContent h1 {
-  font-family: v.$font-primary;
-  font-size: 3.5rem;
-  font-weight: 600;
-  line-height: 1.1;
-  color: v.$surface;
-  margin-bottom: 1.5rem;
-  text-shadow: 0 2px 8px rgba(v.$accent, 0.5);
-
-  @media (max-width: v.$tablet) {
-    font-size: 3rem;
+    bottom: 4vh;
+    padding: 1rem 0;
   }
 
   @media (max-width: v.$mobile) {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-}
-
-.subtitle {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  color: rgba(v.$surface, 0.95);
-  margin-bottom: 2.5rem;
-  text-shadow: 0 1px 4px rgba(v.$accent, 0.5);
-  max-width: 500px;
-
-  @media (max-width: v.$mobile) {
-    font-size: 1.125rem;
-    margin-bottom: 2rem;
+    bottom: 3vh;
+    padding: 1rem 0;
   }
 }
 
 .heroCtas {
   display: flex;
-  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
   flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  @media (max-width: v.$tablet) {
+    gap: 1.5rem;
+    padding: 0 1.5rem;
+  }
 
   @media (max-width: v.$mobile) {
-    flex-direction: column;
     align-items: center;
     gap: 1rem;
+    padding: 0 1rem;
+    
   }
 }
 
+/* Старые стили кнопок (удалите если используете компонент Button) */
 .primary, .secondary {
   padding: 1rem 2.5rem;
   border-radius: 4px;
@@ -106,12 +104,13 @@
   text-decoration: none;
   display: inline-block;
   text-align: center;
-  min-width: 180px;
+  min-width: 200px;
   backdrop-filter: blur(10px);
 
   @media (max-width: v.$mobile) {
     width: 100%;
     max-width: 280px;
+    min-width: auto;
   }
 }
 
@@ -139,10 +138,6 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(v.$surface, 0.3);
   }
-}
-
-.heroContent {
-  animation: heroFadeIn 1s ease-out 0.3s both;
 }
 
 @keyframes heroFadeIn {

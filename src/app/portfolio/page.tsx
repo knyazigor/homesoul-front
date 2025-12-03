@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Header } from "@/components/layout";
+import { Footer, Header } from "@/components/layout";
 import { PortfolioGrid } from "@/components/entities/Portfolio/PortfolioGrid";
 import { getAllPortfolioProjects } from "@/actions/portfolio";
 import styles from "./portfolio.module.scss";
@@ -20,7 +20,6 @@ export default async function PortfolioPage() {
     <>
       <Header />
       <main className={styles.portfolioPage}>
-        {/* Hero секция без отступов */}
         <section className={styles.portfolioHero}>
           <div className={styles.heroBackground}>
             <div className={styles.heroGradient} />
@@ -46,14 +45,12 @@ export default async function PortfolioPage() {
           </div>
         </section>
 
-        {/* Сетка проектов с якорем */}
         <div id="projects-section">
           <OverlapContainer overlap="medium" borderRadius="medium">
             <PortfolioGrid projects={projects} />
           </OverlapContainer>
         </div>
 
-        {/* CTA секция */}
         <section className={styles.portfolioCta}>
           <div className="container">
             <div className={styles.portfolioCtaContent}>
@@ -66,6 +63,7 @@ export default async function PortfolioPage() {
             </div>
           </div>
         </section>
+        <Footer />
       </main>
     </>
   );

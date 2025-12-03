@@ -18,19 +18,29 @@ export const Hero = () => {
         />
         <div className={styles.heroOverlay}></div>
       </div>
-      <div className="container">
-        <div className={styles.heroContent}>
-          <h1>Интерьер с чувствами к Вам</h1>
-          <p className={styles.subtitle}>
-            Создаю пространства, которые отражают вашу индивидуальность и дарят
-            комфорт каждый день
-          </p>
-          <div className={styles.heroCtas}>
-            <Button variant="secondary">Обсудить проект</Button>
-            <Link href="/portfolio">
-              <Button variant="secondary">Посмотреть работы</Button>
-            </Link>
-          </div>
+
+      {/* Логотип по центру */}
+      <div className={styles.heroLogo}>
+        <Image
+          src="/images/hero/hero-logo.svg"
+          alt="Логотип"
+          width={300}
+          height={300}
+          priority
+        />
+      </div>
+
+      {/* Кнопки выше */}
+      <div className={styles.heroBottom}>
+        <div className={styles.heroCtas}>
+          <Button variant="secondary" width={300}>
+            Обсудить проект
+          </Button>
+          <Link href="/portfolio">
+            <Button variant="secondary" width={300}>
+              Посмотреть работы
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

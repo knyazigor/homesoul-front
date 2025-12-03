@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Header } from "@/components/layout";
+import { Footer, Header } from "@/components/layout";
 import { Button, ImageGallery, OverlapContainer } from "@/components/ui";
 import {
   getPortfolioProject,
@@ -135,6 +135,7 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           </section>
         </OverlapContainer>
+        <Footer />
       </main>
     </>
   );

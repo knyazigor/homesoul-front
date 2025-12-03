@@ -28,7 +28,7 @@
   
   @media (max-width: v.$mobile) {
     height: 50vh;
-    min-height: 350px;
+    min-height: 400px;
   }
 }
 
@@ -62,7 +62,7 @@
 .heroText {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 2rem;
+  // padding: 0 2rem;
 }
 
 .heroTitle {

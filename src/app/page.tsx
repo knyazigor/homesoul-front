@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.scss";
-import { Header } from "@/components/layout";
+import { Footer, Header } from "@/components/layout";
 import { Hero } from "@/components/sections";
 import { Portfolio } from "@/components/sections/Portfolio/ui/Portfolio";
 import { getMainPagePortfolioProjects } from "@/actions/portfolio";
@@ -42,33 +42,9 @@ export default async function Home() {
             </div>
           </div>
         </section>
-
-        {/* Услуги */}
-        {/* <Pricing /> */}
-
-        {/* Портфолио */}
         <Portfolio projects={projects} />
-        {/* CTA секция */}
-        <section className={styles.cta}>
-          <div className="container">
-            <div className={styles.ctaContent}>
-              <h2>Готовы преобразить ваше пространство?</h2>
-              <p>
-                Запишитесь на бесплатную консультацию и мы обсудим ваш проект
-              </p>
-              <form className={styles.ctaForm}>
-                <input
-                  type="tel"
-                  placeholder="Ваш телефон"
-                  className={styles.formInput}
-                />
-                <button type="submit" className={styles.primary}>
-                  Записаться на консультацию
-                </button>
-              </form>
-            </div>
-          </div>
-        </section>
+
+        <Footer />
       </div>
     </>
   );

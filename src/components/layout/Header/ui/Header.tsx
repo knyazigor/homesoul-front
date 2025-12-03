@@ -5,20 +5,33 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Header.module.scss";
 import Image from "next/image";
+import { useHeaderScroll } from "../hooks/useHeaderScroll";
+import { Menu, X } from "lucide-react";
+import { SocialLinks } from "@/components/entities";
 
 export const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+  const { isVisible, isScrolled } = useHeaderScroll({
+    hideThreshold: 100,
+    scrolledThreshold: 50,
+    debounceDelay: 50,
+  });
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // Блокируем скролл body при открытом мобильном меню
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    // Очистка при размонтировании
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
   const navItems = [
     { href: "/", label: "Главная" },
@@ -34,72 +47,124 @@ export const Header = () => {
     return pathname.startsWith(href);
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
-      <div className="container">
-        <nav className={styles.nav}>
-          {/* Логотип */}
-          <Link href="/" className={styles.logo}>
+    <>
+      <header
+        className={`${styles.header} ${isScrolled ? styles.scrolled : ""} ${
+          !isVisible ? styles.hidden : ""
+        } ${isMobileMenuOpen ? styles.menuOpen : ""}`}
+      >
+        <div className="container">
+          <nav className={styles.nav}>
+            {/* Логотип */}
+            <Link href="/" className={styles.logo} onClick={closeMobileMenu}>
+              <Image
+                src="/images/logo-header.svg"
+                alt="Душа Вашего Дома"
+                height={60}
+                width={320}
+                className={styles.logoImage}
+                priority
+              />
+            </Link>
+
+            {/* Десктопное меню */}
+            <div className={styles.navLinks}>
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`${styles.navLink} ${
+                    isActiveLink(item.href) ? styles.active : ""
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Кнопка мобильного меню */}
+            <button
+              className={styles.mobileMenuButton}
+              onClick={toggleMobileMenu}
+              aria-label={isMobileMenuOpen ? "Закрыть меню" : "Открыть меню"}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? (
+                <X size={24} className={styles.menuIcon} />
+              ) : (
+                <Menu size={24} className={styles.menuIcon} />
+              )}
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      {/* Мобильное меню */}
+      <div
+        className={`${styles.mobileMenuOverlay} ${
+          isMobileMenuOpen ? styles.open : ""
+        }`}
+        onClick={closeMobileMenu}
+        aria-hidden={!isMobileMenuOpen}
+      />
+
+      <div
+        className={`${styles.mobileMenu} ${
+          isMobileMenuOpen ? styles.open : ""
+        }`}
+        aria-hidden={!isMobileMenuOpen}
+      >
+        <div className={styles.mobileMenuHeader}>
+          <Link
+            href="/"
+            className={styles.mobileLogo}
+            onClick={closeMobileMenu}
+          >
             <Image
-              src="/images/logo.svg"
+              src="/images/logo-header.svg"
               alt="Душа Вашего Дома"
-              width={60}
               height={60}
-              className={styles.logoImage}
-              priority
+              width={320}
+              className={styles.mobileLogoImage}
             />
           </Link>
-          {/* Десктопное меню */}
-          <div className={styles.navLinks}>
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`${styles.navLink} ${
-                  isActiveLink(item.href) ? styles.active : ""
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Кнопка мобильного меню */}
           <button
-            className={`${styles.mobileMenuButton} ${
-              isMobileMenuOpen ? styles.active : ""
-            }`}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Открыть меню"
+            className={styles.mobileMenuClose}
+            onClick={closeMobileMenu}
+            aria-label="Закрыть меню"
           >
-            <span></span>
-            <span></span>
-            <span></span>
+            <X size={24} />
           </button>
+        </div>
+
+        <nav className={styles.mobileMenuContent}>
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`${styles.mobileNavLink} ${
+                isActiveLink(item.href) ? styles.active : ""
+              }`}
+              onClick={closeMobileMenu}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Мобильное меню */}
-        <div
-          className={`${styles.mobileMenu} ${
-            isMobileMenuOpen ? styles.open : ""
-          }`}
-        >
-          <div className={styles.mobileMenuContent}>
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`${styles.mobileNavLink} ${
-                  isActiveLink(item.href) ? styles.active : ""
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
+        <div className={styles.mobileSocialLinks}>
+          <SocialLinks variant="rounded" size="small" showLabels={false} />
         </div>
       </div>
-    </header>
+    </>
   );
 };

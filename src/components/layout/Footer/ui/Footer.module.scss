@@ -1,0 +1,217 @@
+@use '@/styles/variables' as v;
+
+.footer {
+  background-color: v.$accent;
+  color: v.$background;
+  padding: 3rem 0 2rem;
+  position: relative;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: v.$tablet) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.copyright {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.author {
+  font-weight: 600;
+  font-size: 1rem !important;
+  font-family: v.$font-secondary;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.link {
+  color: v.$background;
+  text-decoration: none;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &.active {
+    font-weight: 600;
+    opacity: 1;
+  }
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  
+  @media (max-width: v.$tablet) {
+    gap: 0.5rem;
+  }
+}
+
+.contactIcon {
+  flex-shrink: 0;
+  color: v.$background;
+  // margin-top: 0.1rem; /* Для выравнивания с текстом */
+}
+
+.contactLabel {
+  // font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 500;
+  min-width: 60px; /* Для выравнивания текста */
+  flex-shrink: 0;
+}
+
+.contactLink {
+  color: v.$background;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.contactText {
+  color: v.$background;
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.socialSection {
+  margin-top: 1.5rem;
+  
+  :global(.social-links) {
+    justify-content: flex-start;
+    gap: 1rem;
+    
+    @media (max-width: v.$tablet) {
+      justify-content: center;
+    }
+  }
+}
+
+.divider {
+  height: 1px;
+  background: rgba(v.$background, 0.2);
+  margin: 2rem 0;
+}
+
+.bottom {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.rights,
+.disclaimer {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Анимация появления */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Улучшение доступности */
+@media (prefers-reduced-motion: reduce) {
+  .footer {
+    animation: none !important;
+  }
+}
+
+/* Адаптивность */
+@media (max-width: v.$tablet) {
+  .footer {
+    padding: 2.5rem 0 1.5rem;
+  }
+  
+  .footerContent {
+    margin-bottom: 1.5rem;
+  }
+  
+  .contactItem {
+    flex-wrap: wrap;
+  }
+  
+  .contactLabel {
+    min-width: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 2rem 0 1rem;
+  }
+  
+  .footerContent {
+    gap: 1.5rem;
+  }
+  
+  .contactItem {
+    gap: 0.4rem;
+  }
+  
+  .socialSection {
+    margin-top: 1rem;
+    
+    :global(.social-links) {
+      justify-content: flex-start;
+    }
+  }
+}
