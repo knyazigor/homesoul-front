@@ -148,13 +148,13 @@
   max-width: 400px;
   
   /* Используем min-height для адаптивности */
-  min-height: 100vh;
+  // min-height: 100vh;
   min-height: 100dvh;
-  min-height: -webkit-fill-available;
+  // min-height: -webkit-fill-available;
   
   /* Ограничиваем максимальную высоту */
-  max-height: 100vh;
-  max-height: 100dvh;
+  // max-height: 100vh;
+  // max-height: 100dvh;
   
   background: rgba(v.$accent, 0.95);
   backdrop-filter: blur(20px);
@@ -182,7 +182,7 @@
   padding-bottom: 0.5rem;
   border-bottom: 1px solid rgba(v.$surface, 0.1);
   margin-bottom: 1rem;
-  flex-shrink: 0; /* Чтобы не сжимался */
+  flex-shrink: 0;
 }
 
 .mobileLogo {
