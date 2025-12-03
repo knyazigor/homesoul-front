@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Footer, Header } from "@/components/layout";
 import { Button, ImageGallery, OverlapContainer } from "@/components/ui";
 import {
   getPortfolioProject,
@@ -70,7 +69,6 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <>
-      <Header />
       <main className={styles.projectPage}>
         {coverImage && (
           <section className={styles.projectCover}>
@@ -135,7 +133,6 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           </section>
         </OverlapContainer>
-        <Footer />
       </main>
     </>
   );
