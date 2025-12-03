@@ -75,8 +75,8 @@ export const SocialLinks = ({
             <Image
               src={social.icon}
               alt={social.label}
-              width={variant === "minimal" ? 20 : 24}
-              height={variant === "minimal" ? 20 : 24}
+              width={32}
+              height={32}
               className={styles.icon}
             />
           </div>

@@ -86,25 +86,25 @@
 // Размеры
 .small {
   .icon {
-    width: 16px;
-    height: 16px;
-  }
-  
-  .rounded .iconWrapper {
-    width: 24px;
+    width: 26px;
     height: 26px;
-  }
-}
-
-.medium {
-  .icon {
-    width: 24px;
-    height: 24px;
   }
   
   .rounded .iconWrapper {
     width: 32px;
     height: 32px;
+  }
+}
+
+.medium {
+  .icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .rounded .iconWrapper {
+    width: 40px;
+    height: 40px;
   }
 }
 
