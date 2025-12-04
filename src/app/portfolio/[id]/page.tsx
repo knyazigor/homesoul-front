@@ -11,6 +11,7 @@ import styles from "./project.module.scss";
 import { getOriginalImageUrl } from "@/lib/image-utils";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
+import ProjectToolbar from "./ProjectToolbar";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -52,6 +53,8 @@ export async function generateStaticParams() {
 
 export default async function ProjectPage({ params }: Props) {
   let project;
+  let nextProjectId: string | null = null;
+  let prevProjectId: string | null = null;
 
   try {
     const { id } = await params;
@@ -63,6 +66,28 @@ export default async function ProjectPage({ params }: Props) {
 
   if (!project) {
     notFound();
+  }
+
+  try {
+    const projects = await getAllPortfolioProjects();
+
+    const index = projects.findIndex(
+      (p) => p.documentId === project.documentId
+    );
+
+    if (index === -1) {
+      console.error("Current project not found in projects list");
+    } else {
+      if (index > 0) {
+        prevProjectId = projects[index - 1].documentId;
+      }
+
+      if (index < projects.length - 1) {
+        nextProjectId = projects[index + 1].documentId;
+      }
+    }
+  } catch (error) {
+    console.error("Error determining next/prev projects:", error);
   }
 
   const coverImage = project.cover || project.images[0];
@@ -87,10 +112,14 @@ export default async function ProjectPage({ params }: Props) {
               <div className="container">
                 <div className={styles.coverText}>
                   <h1 className={styles.projectTitle}>{project.title}</h1>
-                  {project.subtitle && (
+                  {/* {project.subtitle && (
                     <p className={styles.projectSubtitle}>{project.subtitle}</p>
-                  )}
+                  )} */}
                 </div>
+                <ProjectToolbar
+                  prevProjectId={prevProjectId}
+                  nextProjectId={nextProjectId}
+                />
               </div>
             </div>
           </section>

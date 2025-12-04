@@ -24,16 +24,14 @@ export const PortfolioGrid = ({ projects }: PortfolioGridProps) => {
     <section className={styles.portfolioGridSection}>
       <div className="container">
         <div className={styles.portfolioGrid}>
-          {projects
-            .sort((a, b) => Number(a.order) - Number(b.order))
-            .map((project, index) => (
-              <PortfolioCard
-                key={project.id}
-                project={project}
-                href={`/portfolio/${project.documentId}`}
-                priority={index < 6}
-              />
-            ))}
+          {projects.map((project, index) => (
+            <PortfolioCard
+              key={project.id}
+              project={project}
+              href={`/portfolio/${project.documentId}`}
+              priority={index < 6}
+            />
+          ))}
         </div>
       </div>
     </section>
