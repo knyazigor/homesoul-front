@@ -1,25 +1,32 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Header.module.scss";
 import Image from "next/image";
 import { useHeaderScroll } from "../hooks/useHeaderScroll";
-import { Menu, X } from "lucide-react";
 import { SocialLinks } from "@/components/entities";
+import { BurgerMenuButton } from "../ui/BurgerMenuButton";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const { isVisible, isScrolled } = useHeaderScroll({
+  const { /* isVisible, */ isScrolled } = useHeaderScroll({
     hideThreshold: 100,
     scrolledThreshold: 50,
     debounceDelay: 50,
   });
 
-  // Блокируем скролл body при открытом мобильном меню
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+  }, []);
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen((prev) => !prev);
+  }, []);
+
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -27,11 +34,18 @@ export const Header = () => {
       document.body.style.overflow = "";
     }
 
-    // Очистка при размонтировании
     return () => {
       document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      closeMobileMenu();
+    };
+
+    handleRouteChange();
+  }, [pathname, closeMobileMenu]);
 
   const navItems = [
     { href: "/", label: "Главная" },
@@ -47,68 +61,62 @@ export const Header = () => {
     return pathname.startsWith(href);
   };
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  // Обработчик клика по ссылке в мобильном меню
+  const handleMobileLinkClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      const href = e.currentTarget.getAttribute("href");
+      closeMobileMenu();
 
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
+      // Небольшая задержка для анимации закрытия меню
+      setTimeout(() => {
+        if (href) {
+          window.location.href = href;
+        }
+      }, 300);
+    },
+    [closeMobileMenu]
+  );
 
   return (
     <>
+      <Link href="/" className={styles.logo}>
+        <Image
+          src="/images/logo-header.svg"
+          alt="Душа Вашего Дома"
+          height={60}
+          width={320}
+          className={styles.logoImage}
+          priority
+        />
+      </Link>
+      <BurgerMenuButton
+        isOpen={isMobileMenuOpen}
+        onClick={toggleMobileMenu}
+        className={`${styles.mobileMenuButton} ${
+          isScrolled ? styles.scrolled : ""
+        }`}
+      />
       <header
-        className={`${styles.header} ${isScrolled ? styles.scrolled : ""} ${
-          !isVisible ? styles.hidden : ""
-        } ${isMobileMenuOpen ? styles.menuOpen : ""}`}
+        className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}
       >
-        <div className="container">
-          <nav className={styles.nav}>
-            {/* Логотип */}
-            <Link href="/" className={styles.logo} onClick={closeMobileMenu}>
-              <Image
-                src="/images/logo-header.svg"
-                alt="Душа Вашего Дома"
-                height={60}
-                width={320}
-                className={styles.logoImage}
-                priority
-              />
-            </Link>
-
-            {/* Десктопное меню */}
-            <div className={styles.navLinks}>
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`${styles.navLink} ${
-                    isActiveLink(item.href) ? styles.active : ""
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* Кнопка мобильного меню */}
-            <button
-              className={styles.mobileMenuButton}
-              onClick={toggleMobileMenu}
-              aria-label={isMobileMenuOpen ? "Закрыть меню" : "Открыть меню"}
-              aria-expanded={isMobileMenuOpen}
-            >
-              {isMobileMenuOpen ? (
-                <X size={24} className={styles.menuIcon} />
-              ) : (
-                <Menu size={24} className={styles.menuIcon} />
-              )}
-            </button>
-          </nav>
-        </div>
+        <nav className={styles.nav}>
+          <div className={styles.navLinks}>
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`${styles.navLink} ${
+                  isActiveLink(item.href) ? styles.active : ""
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
       </header>
 
-      {/* Мобильное меню */}
       <div
         className={`${styles.mobileMenuOverlay} ${
           isMobileMenuOpen ? styles.open : ""
@@ -123,29 +131,6 @@ export const Header = () => {
         }`}
         aria-hidden={!isMobileMenuOpen}
       >
-        <div className={styles.mobileMenuHeader}>
-          <Link
-            href="/"
-            className={styles.mobileLogo}
-            onClick={closeMobileMenu}
-          >
-            <Image
-              src="/images/logo-header.svg"
-              alt="Душа Вашего Дома"
-              height={60}
-              width={320}
-              className={styles.mobileLogoImage}
-            />
-          </Link>
-          <button
-            className={styles.mobileMenuClose}
-            onClick={closeMobileMenu}
-            aria-label="Закрыть меню"
-          >
-            <X size={24} />
-          </button>
-        </div>
-
         <nav className={styles.mobileMenuContent}>
           {navItems.map((item) => (
             <Link
@@ -154,7 +139,7 @@ export const Header = () => {
               className={`${styles.mobileNavLink} ${
                 isActiveLink(item.href) ? styles.active : ""
               }`}
-              onClick={closeMobileMenu}
+              onClick={handleMobileLinkClick}
             >
               {item.label}
             </Link>
