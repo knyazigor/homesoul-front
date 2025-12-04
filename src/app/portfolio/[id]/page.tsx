@@ -11,7 +11,8 @@ import styles from "./project.module.scss";
 import { getOriginalImageUrl } from "@/lib/image-utils";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
-import ProjectToolbar from "./ProjectToolbar";
+import ProjectNavigationButton from "./ProjectNavigationButton";
+import ShareButton from "./ShareButton";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -41,7 +42,6 @@ export const dynamic = "force-dynamic";
 export async function generateStaticParams() {
   try {
     const projects = await getAllPortfolioProjects();
-
     return projects.map((project) => ({
       id: project.documentId,
     }));
@@ -51,118 +51,136 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function ProjectPage({ params }: Props) {
-  let project;
-  let nextProjectId: string | null = null;
-  let prevProjectId: string | null = null;
-
+async function getProjectNavigation(projectId: string) {
   try {
-    const { id } = await params;
-    project = await getPortfolioProject(id);
+    const projects = await getAllPortfolioProjects();
+    const index = projects.findIndex((p) => p.documentId === projectId);
+
+    if (index === -1) return { prevProjectId: null, nextProjectId: null };
+
+    return {
+      prevProjectId: index > 0 ? projects[index - 1].documentId : null,
+      nextProjectId:
+        index < projects.length - 1 ? projects[index + 1].documentId : null,
+    };
   } catch (error) {
-    console.error("Error loading project:", error);
-    notFound();
+    console.error("Error getting project navigation:", error);
+    return { prevProjectId: null, nextProjectId: null };
   }
+}
+
+export default async function ProjectPage({ params }: Props) {
+  const { id } = await params;
+
+  // Параллельная загрузка данных
+  const [project, navigation] = await Promise.all([
+    getPortfolioProject(id).catch(() => null),
+    getProjectNavigation(id),
+  ]);
 
   if (!project) {
     notFound();
   }
 
-  try {
-    const projects = await getAllPortfolioProjects();
-
-    const index = projects.findIndex(
-      (p) => p.documentId === project.documentId
-    );
-
-    if (index === -1) {
-      console.error("Current project not found in projects list");
-    } else {
-      if (index > 0) {
-        prevProjectId = projects[index - 1].documentId;
-      }
-
-      if (index < projects.length - 1) {
-        nextProjectId = projects[index + 1].documentId;
-      }
-    }
-  } catch (error) {
-    console.error("Error determining next/prev projects:", error);
-  }
-
   const coverImage = project.cover || project.images[0];
 
   return (
-    <>
-      <main className={styles.projectPage}>
-        {coverImage && (
-          <section className={styles.projectCover}>
-            <div className={styles.coverImageContainer}>
-              <Image
-                src={getOriginalImageUrl(coverImage)}
-                alt={coverImage.alternativeText || project.title}
-                width={coverImage.width}
-                height={coverImage.height}
-                className={styles.coverImage}
-                priority
-              />
-              <div className={styles.coverOverlay} />
-            </div>
-            <div className={styles.coverContent}>
-              <div className="container">
-                <div className={styles.coverText}>
-                  <h1 className={styles.projectTitle}>{project.title}</h1>
-                  {/* {project.subtitle && (
-                    <p className={styles.projectSubtitle}>{project.subtitle}</p>
-                  )} */}
-                </div>
-                <ProjectToolbar
-                  prevProjectId={prevProjectId}
-                  nextProjectId={nextProjectId}
+    <main className={styles.projectPage}>
+      {/* Hero секция */}
+      {coverImage && (
+        <section className={styles.heroSection}>
+          <div className={styles.heroImageContainer}>
+            <Image
+              src={getOriginalImageUrl(coverImage)}
+              alt={coverImage.alternativeText || project.title}
+              width={coverImage.width}
+              height={coverImage.height}
+              className={styles.heroImage}
+              priority
+              sizes="100vw"
+            />
+            <div className={styles.heroOverlay} />
+          </div>
+
+          <div className={styles.heroContent}>
+            <div className={styles.heroLayout}>
+              {/* Десктопные кнопки (скрываются на мобильных) */}
+              <div className={styles.desktopNavButtons}>
+                <ProjectNavigationButton
+                  prevProjectId={navigation.prevProjectId}
+                  type="left"
                 />
+              </div>
+
+              <div className={styles.heroText}>
+                <h1 className={styles.projectTitle}>{project.title}</h1>
+              </div>
+
+              <div className={styles.desktopNavButtons}>
+                <ProjectNavigationButton
+                  nextProjectId={navigation.nextProjectId}
+                  type="right"
+                />
+              </div>
+
+              {/* Мобильные кнопки (скрываются на десктопе) */}
+              <div className={styles.mobileNavButtons}>
+                <ProjectNavigationButton
+                  prevProjectId={navigation.prevProjectId}
+                  type="left"
+                />
+                <ProjectNavigationButton
+                  nextProjectId={navigation.nextProjectId}
+                  type="right"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <OverlapContainer overlap="medium" borderRadius="medium">
+        <nav className={styles.contentBreadcrumbs}>
+          <div className="container">
+            <Link href="/portfolio" className={styles.breadcrumbLink}>
+              Портфолио
+            </Link>
+            <span className={styles.breadcrumbSeparator}>/</span>
+            <span className={styles.breadcrumbCurrent}>{project.title}</span>
+          </div>
+        </nav>
+
+        <section className={styles.projectGallery}>
+          <div className="container">
+            <ImageGallery images={project.images} />
+          </div>
+        </section>
+
+        {project.description && (
+          <section className={styles.projectDescription}>
+            <div className="container">
+              <div className={styles.descriptionContent}>
+                <h2>О проекте</h2>
+                <ReactMarkdown>{project.description}</ReactMarkdown>
               </div>
             </div>
           </section>
         )}
-        <OverlapContainer overlap="medium" borderRadius="medium">
-          <nav className={styles.breadcrumbs}>
-            <div className="container">
-              <Link href="/portfolio" className={styles.breadcrumbLink}>
-                Портфолио
-              </Link>
-              <span className={styles.breadcrumbSeparator}>/</span>
-              <span className={styles.breadcrumbCurrent}>{project.title}</span>
-            </div>
-          </nav>
 
-          <section className={styles.projectGallery}>
-            <div className="container">
-              <ImageGallery images={project.images} />
-            </div>
-          </section>
-
-          {project.description && (
-            <section className={styles.projectDescription}>
-              <div className="container">
-                <div className={styles.descriptionContent}>
-                  <h2>О проекте</h2>
-                  <ReactMarkdown>{project.description}</ReactMarkdown>
-                </div>
-              </div>
-            </section>
-          )}
-
-          <section className={styles.projectNavigation}>
-            <div className="container">
+        <footer className={styles.projectFooter}>
+          <div className="container">
+            <div className={styles.footerNavigation}>
               <Link href="/portfolio">
                 <Button variant="outline" icon={<ArrowLeft />}>
                   Вернуться в портфолио
                 </Button>
               </Link>
+
+              <ShareButton />
             </div>
-          </section>
-        </OverlapContainer>
-      </main>
-    </>
+          </div>
+        </footer>
+      </OverlapContainer>
+    </main>
   );
 }

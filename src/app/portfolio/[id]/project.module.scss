@@ -5,14 +5,14 @@
   background: v.$background;
 }
 
-/* Секция обложки */
-.projectCover {
+/* Hero секция */
+.heroSection {
   width: 100%;
   position: relative;
   margin-bottom: 0;
 }
 
-.coverImageContainer {
+.heroImageContainer {
   position: relative;
   width: 100%;
   height: 80vh;
@@ -20,14 +20,14 @@
   overflow: hidden;
 }
 
-.coverImage {
+.heroImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.coverOverlay {
+.heroOverlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -35,12 +35,12 @@
   height: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.5) 100%
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.4) 100%
   );
 }
 
-.coverContent {
+.heroContent {
   position: absolute;
   top: 0;
   left: 0;
@@ -49,99 +49,203 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  text-align: center;
+  color: v.$background;
 }
 
-.coverText {
-  max-width: 800px;
-  padding: 0 2rem;
+.heroBreadcrumbs {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  width: 100%;
+  color: v.$background;
+  font-size: 0.875rem;
+  z-index: 2;
+  
+  @media (max-width: v.$tablet) {
+    top: 1.5rem;
+  }
+}
+
+.breadcrumbLink {
+  color: v.$background;
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.9;
+  
+  &:hover {
+    text-decoration: underline;
+    opacity: 1;
+  }
+}
+
+.breadcrumbSeparator {
+  margin: 0 0.5rem;
+  color: rgba(v.$background, 0.7);
+}
+
+.breadcrumbCurrent {
+  color: v.$background;
+  opacity: 0.7;
+}
+
+.heroLayout {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: v.$max-container-width;
+  padding: 0 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Десктопные кнопки */
+.desktopNavButtons {
+  display: block;
+}
+
+/* Мобильные кнопки */
+.mobileNavButtons {
+  display: none;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+
+/* Для мобильных устройств */
+@media (max-width: v.$mobile) {
+  .heroLayout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    gap: 1rem;
+  }
+  
+  .desktopNavButtons {
+    display: none;
+  }
+  
+  .mobileNavButtons {
+    display: flex;
+  }
+  
+  .heroText {
+    grid-column: 1;
+    grid-row: 1;
+  }
 }
 
 .projectTitle {
   font-family: v.$font-primary;
   font-size: 3.5rem;
-  color: white;
-  margin-bottom: 1.5rem;
+  color: v.$background;
+  margin: 0;
   line-height: 1.1;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   font-weight: 300;
   letter-spacing: 4px;
+  text-align: center;
   
   @media (max-width: v.$tablet) {
     font-size: 3rem;
   }
   
   @media (max-width: v.$mobile) {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    padding: 0 0.5rem;
   }
 }
 
-.projectSubtitle {
-  font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.4;
-  margin-bottom: 2rem;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  
-  @media (max-width: v.$mobile) {
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-  }
-}
-
-.projectMeta {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.8);
-  
-  @media (max-width: v.$mobile) {
-    flex-direction: column;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-  }
-}
-
-.breadcrumbs {
-  padding: 1rem 0; /* Уменьшенные отступы */
+/* Альтернативные breadcrumbs внутри контейнера */
+.contentBreadcrumbs {
+  padding: 1.5rem 0;
   background: v.$surface;
   border-bottom: 1px solid v.$border;
   
   @media (max-width: v.$mobile) {
-    padding: 0.75rem 0;
+    padding: 1rem 0;
   }
-}
-
-.breadcrumbLink {
-  color: v.$primary;
-  text-decoration: none;
-  font-weight: 500;
   
-  &:hover {
-    text-decoration: underline;
+  .breadcrumbLink {
+    color: v.$primary;
+    
+    &:hover {
+      color: v.$primary-dark;
+    }
+  }
+  
+  .breadcrumbCurrent {
+    color: v.$text-light;
   }
 }
 
-.breadcrumbSeparator {
-  margin: 0 0.5rem;
-  color: v.$text-light;
+/* Кнопки навигации */
+.navButton {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(v.$background, 0.15);
+  border: none;
+  color: v.$background;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  &:hover:not(:disabled) {
+    background: rgba(v.$background, 0.25);
+    transform: scale(1.05);
+  }
+  
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+  
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: v.$mobile) {
+    width: 48px;
+    height: 48px;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }
 
-.breadcrumbCurrent {
-  color: v.$text-light;
+.navButtonLeft {
+  justify-self: start;
 }
 
+.navButtonRight {
+  justify-self: end;
+}
+
+/* Галерея */
 .projectGallery {
-  padding: 3rem 0;
+  padding: 2rem 0;
   
   @media (max-width: v.$tablet) {
-    padding: 2rem 0;
+    padding: 1.5rem 0;
+  }
+  
+  @media (max-width: v.$mobile) {
+    padding: 1rem 0;
   }
 }
 
+/* Описание проекта */
 .projectDescription {
   padding: 4rem 0;
   background: v.$surface;
@@ -149,17 +253,23 @@
   @media (max-width: v.$tablet) {
     padding: 3rem 0;
   }
+  
+  @media (max-width: v.$mobile) {
+    padding: 2rem 0;
+  }
 }
 
 .descriptionContent {
-  
+  max-width: 800px;
   margin: 0 auto;
   
   h2 {
     font-family: v.$font-primary;
     font-size: 2rem;
     color: v.$accent;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    
     @media (max-width: v.$mobile) {
       font-size: 1.75rem;
     }
@@ -168,36 +278,34 @@
   p {
     font-size: 1.125rem;
     line-height: 1.7;
-    color: v.$text-dark;    
+    color: v.$text-dark;
+    margin-bottom: 1.5rem;
+  }
+  
+  *:last-child {
+    margin-bottom: 0;
   }
 }
 
-.projectNavigation {
+/* Футер */
+.projectFooter {
   padding: 3rem 0;
   border-top: 1px solid v.$border;
-}
-
-.backButton {
-  color: v.$primary;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.75rem 1.5rem;
-  border: 2px solid v.$primary;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  background: v.$surface;
   
-  &:hover {
-    background: v.$primary;
-    color: v.$surface;
+  @media (max-width: v.$mobile) {
+    padding: 2rem 0;
   }
 }
 
-.coverToolbar {
+.footerNavigation {
   display: flex;
-  width: 100%;
   justify-content: space-between;
-}
-
-.toolbarIcon {
-  color: v.$background;
+  align-items: center;
+  gap: 1rem;
+  
+  @media (max-width: v.$mobile) {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 }

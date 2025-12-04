@@ -4,12 +4,12 @@ import styles from "./Button.module.scss";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline" | "ghost";
   size?: "small" | "medium" | "large";
-  children: ReactNode;
+  children?: ReactNode;
   icon?: ReactNode;
   iconPosition?: "left" | "right";
   fullWidth?: boolean;
   uppercase?: boolean;
-  width?: string | number; // Новый пропс
+  width?: string | number;
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -20,12 +20,11 @@ export const Button: FC<ButtonProps> = ({
   iconPosition = "left",
   fullWidth = false,
   uppercase = true,
-  width, // Новый пропс
+  width,
   className = "",
-  style = {}, // Добавляем поддержку style
+  style = {},
   ...props
 }) => {
-  // Формируем стили для width
   const buttonStyles = {
     ...style,
     ...(width && { width: typeof width === "number" ? `${width}px` : width }),
