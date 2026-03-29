@@ -14,8 +14,8 @@ COPY . .
 
 # Указываем переменные окружения для сборки
 ENV NODE_ENV=production
-ENV BASE_URL=http://dushavashegodoma.ru:1337
-ENV NEXT_PUBLIC_API_URL=http://dushavashegodoma.ru:1337/api
+ENV BASE_URL=https://api-homesoul.ufatitan.ru
+ENV NEXT_PUBLIC_API_URL=https://api-homesoul.ufatitan.ru
 
 # Собираем приложение
 RUN npm run build
@@ -41,7 +41,7 @@ EXPOSE 3000
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOST=0.0.0.0
-ENV BASE_URL=http://dushavashegodoma.ru:1337
-ENV NEXT_PUBLIC_API_URL=http://dushavashegodoma.ru:1337/api
+ENV BASE_URL=https://api-homesoul.ufatitan.ru
+ENV NEXT_PUBLIC_API_URL=https://api-homesoul.ufatitan.ru
 
 CMD ["npm", "start"]
