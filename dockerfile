@@ -1,45 +1,47 @@
-# Этап сборки - используем Node.js 20
+# Этап сборки
 FROM node:20-alpine AS builder
 
-# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем файлы зависимостей
+# Копируем package files
 COPY package*.json ./
 
-# Устанавливаем все зависимости (включая dev)
+# Устанавливаем зависимости
 RUN npm ci
 
-# Копируем исходный код
+# Копируем исходники
 COPY . .
-COPY .env* ./
+
+# Указываем переменные окружения для сборки
+ENV NODE_ENV=production
+ENV BASE_URL=http://dushavashegodoma.ru:1337
+ENV NEXT_PUBLIC_API_URL=http://dushavashegodoma.ru:1337/api
 
 # Собираем приложение
 RUN npm run build
 
 # Этап запуска
-FROM node:20-alpine AS runner
+FROM node:20-alpine
 
 WORKDIR /app
 
-# Устанавливаем переменные окружения
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-
-# Создаем пользователя без привилегий
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Копируем из этапа сборки
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Копируем все необходимое для запуска
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 
-# Переключаемся на непривилегированного пользователя
 USER nextjs
 
-# Открываем порт
 EXPOSE 3000
 
-# Запускаем приложение
-CMD ["node", "server.js"]
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOST=0.0.0.0
+ENV BASE_URL=http://dushavashegodoma.ru:1337
+ENV NEXT_PUBLIC_API_URL=http://dushavashegodoma.ru:1337/api
+
+CMD ["npm", "start"]
