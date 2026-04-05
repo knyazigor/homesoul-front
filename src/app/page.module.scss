@@ -6,32 +6,33 @@
   background-color: v.$background;
 }
 
-/* О себе */
+/* О себе — переделано на Flexbox */
 .about {
   padding: 6rem 0;
   background: v.$background;
 }
 
 .aboutContent {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  display: flex;
+  flex-direction: column; 
   align-items: center;
+  gap: 4rem;
 
-  // Явное позиционирование для десктопа
   .aboutText {
-    grid-column: 1;
+    flex: 1 1 50%; 
+    min-width: 0; 
   }
+
   .aboutImage {
-    grid-column: 2;
+    flex: 1 1 50%;
+    min-width: 0;
   }
 
   @media (max-width: v.$tablet) {
-    grid-template-columns: 1fr;
+    flex-direction: column; 
     gap: 3rem;
     
-    // 🔥 Гарантируем порядок на мобильных: текст → изображение
-    .aboutText {
+   .aboutText {
       order: 1;
     }
     .aboutImage {
@@ -89,7 +90,6 @@
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   
-  // На мобильных изображение тоже будет после текста благодаря order
   @media (max-width: v.$tablet) {
     width: 100%;
     max-width: 500px;
