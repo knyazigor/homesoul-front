@@ -18,9 +18,25 @@
   gap: 4rem;
   align-items: center;
 
+  // Явное позиционирование для десктопа
+  .aboutText {
+    grid-column: 1;
+  }
+  .aboutImage {
+    grid-column: 2;
+  }
+
   @media (max-width: v.$tablet) {
     grid-template-columns: 1fr;
     gap: 3rem;
+    
+    // 🔥 Гарантируем порядок на мобильных: текст → изображение
+    .aboutText {
+      order: 1;
+    }
+    .aboutImage {
+      order: 2;
+    }
   }
 }
 
@@ -29,6 +45,13 @@
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   color: v.$accent;
+}
+
+.aboutText h3 {
+  font-family: v.$font-primary;
+  font-size: 1.75rem;
+  margin: 1.5rem 0 1rem;
+  color: v.$text-dark;
 }
 
 .aboutText p {
@@ -41,17 +64,19 @@
 .features {
   list-style: none;
   padding: 0;
+  margin: 1.5rem 0;
 
   li {
-    padding: 0.5rem 0;
-    padding-left: 1.5rem;
+    padding: 0.5rem 0 0.5rem 1.5rem;
     position: relative;
     color: v.$text-dark;
+    line-height: 1.5;
 
     &::before {
       content: "✓";
       position: absolute;
       left: 0;
+      top: 0.5rem;
       color: v.$primary;
       font-weight: bold;
     }
@@ -63,6 +88,13 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  
+  // На мобильных изображение тоже будет после текста благодаря order
+  @media (max-width: v.$tablet) {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
 }
 
 /* Услуги */
@@ -199,4 +231,9 @@
     border-color: v.$primary;
     color: v.$primary;
   }
+}
+
+.strong {
+  font-weight: bold;
+  margin-right: 0.4rem;
 }

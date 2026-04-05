@@ -1,0 +1,12 @@
+.main {
+  margin: 0 auto;
+  width: 80vw;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  & > h1 {
+    font-size: large;
+  }
+  & > h3 {
+    font-size: larger;
+  }
+}

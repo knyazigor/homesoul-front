@@ -28,7 +28,7 @@ export const Footer = () => {
               Политика конфиденциальности
             </Link>
             <Link
-              href="/privacy-policy"
+              href="/personal-data-policy"
               className={`${styles.link} ${
                 pathname === "/personal-data-policy" ? styles.active : ""
               }`}
@@ -48,8 +48,11 @@ export const Footer = () => {
 
             <div className={styles.contactItem}>
               <Mail size={18} className={styles.contactIcon} />
-              <a href="mailto:info@dushadoma.ru" className={styles.contactLink}>
-                info@dushadoma.ru
+              <a
+                href="mailto:kvashninapv@gmail.com"
+                className={styles.contactLink}
+              >
+                kvashninapv@gmail.com
               </a>
             </div>
 

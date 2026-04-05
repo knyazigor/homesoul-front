@@ -12,7 +12,7 @@ export const getAllPortfolioProjects = unstable_cache(
   {
     revalidate: 60,
     tags: ["portfolio"],
-  }
+  },
 );
 
 export const getMainPagePortfolioProjects = unstable_cache(
@@ -23,7 +23,7 @@ export const getMainPagePortfolioProjects = unstable_cache(
   {
     revalidate: 60,
     tags: ["portfolio"],
-  }
+  },
 );
 
 export const getPortfolioProjects = unstable_cache(
@@ -36,11 +36,11 @@ export const getPortfolioProjects = unstable_cache(
   }): Promise<PortfolioProject[]> => {
     return await strapiClient.getPortfolioProjects(options);
   },
-  ["portfolio-projects", "custom"], // Статический ключ
+  ["portfolio-projects", "custom"],
   {
     revalidate: 60,
     tags: ["portfolio"],
-  }
+  },
 );
 
 export const getPortfolioProject = unstable_cache(
@@ -51,5 +51,5 @@ export const getPortfolioProject = unstable_cache(
   {
     revalidate: 60,
     tags: ["portfolio"],
-  }
+  },
 );

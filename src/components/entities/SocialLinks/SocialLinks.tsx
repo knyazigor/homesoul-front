@@ -37,12 +37,12 @@ export const SocialLinks = ({
       icon: "/images/whatsapp-logo-white.svg",
       label: "WhatsApp",
     },
-    {
-      name: "vk",
-      url: "https://vkvideo.ru/@club233008937",
-      icon: "/images/vk-logo-white.svg",
-      label: "ВКонтакте",
-    },
+    // {
+    //   name: "vk",
+    //   url: "https://vkvideo.ru/@club233008937",
+    //   icon: "/images/vk-logo-white.svg",
+    //   label: "ВКонтакте",
+    // },
     {
       name: "max",
       url: "https://max.ru/u/f9LHodD0cOIr8wE3Zw2qXKAK3_M5G6JthcHU2M0NElRpLMLwYAxgriI1AbI",

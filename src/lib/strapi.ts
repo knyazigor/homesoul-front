@@ -32,6 +32,8 @@ class StrapiClient {
       "Content-Type": "application/json",
     };
 
+    console.log("🔗 Strapi Request URL:", url);
+
     if (this.apiToken) {
       headers["Authorization"] = `Bearer ${this.apiToken}`;
     }
@@ -46,7 +48,7 @@ class StrapiClient {
 
     if (!response.ok) {
       throw new Error(
-        `Strapi API error: ${response.status} ${response.statusText}`
+        `Strapi API error: ${response.status} ${response.statusText} URL: ${this.baseUrl}${endpoint}`,
       );
     }
 
@@ -54,7 +56,7 @@ class StrapiClient {
   }
 
   async getPortfolioProjects(
-    options?: PortfolioQueryOptions
+    options?: PortfolioQueryOptions,
   ): Promise<PortfolioProject[]> {
     try {
       const queryParams = new URLSearchParams();
@@ -64,7 +66,7 @@ class StrapiClient {
       if (options?.displayOnMainPage !== undefined) {
         queryParams.append(
           "filters[displayOnMainPage][$eq]",
-          options.displayOnMainPage.toString()
+          options.displayOnMainPage.toString(),
         );
       }
 
@@ -72,7 +74,7 @@ class StrapiClient {
       if (options?.featured !== undefined) {
         queryParams.append(
           "filters[featured][$eq]",
-          options.featured.toString()
+          options.featured.toString(),
         );
       }
 
@@ -111,7 +113,7 @@ class StrapiClient {
   }
 
   async getMainPagePortfolioProjects(
-    limit?: number
+    limit?: number,
   ): Promise<PortfolioProject[]> {
     return this.getPortfolioProjects({
       displayOnMainPage: true,
@@ -122,7 +124,7 @@ class StrapiClient {
   }
 
   async getPortfolioProject(
-    id: string | number
+    id: string | number,
   ): Promise<PortfolioProject | null> {
     try {
       const response = await this.fetchFromStrapi<
