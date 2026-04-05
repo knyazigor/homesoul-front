@@ -14,7 +14,7 @@ COPY . .
 
 # Указываем переменные окружения для сборки
 ENV NODE_ENV=production
-ENV BASE_URL=https://api-homesoul.ufatitan.ru
+ENV BASE_URL=https://api-homesoul.ufatitan.ru/api
 ENV NEXT_PUBLIC_API_URL=https://api-homesoul.ufatitan.ru
 
 # Собираем приложение
