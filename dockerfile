@@ -41,7 +41,7 @@ EXPOSE 3000
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOST=0.0.0.0
-ENV BASE_URL=https://api-homesoul.ufatitan.ru
+ENV BASE_URL=https://api-homesoul.ufatitan.ru/api
 ENV NEXT_PUBLIC_API_URL=https://api-homesoul.ufatitan.ru
 
 CMD ["npm", "start"]
