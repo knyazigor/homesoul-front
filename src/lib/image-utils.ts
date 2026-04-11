@@ -3,28 +3,20 @@ import { OptimizedImage, StrapiImage } from "@/lib/types";
 export function getOptimizedImageUrl(
   image: OptimizedImage | StrapiImage | null | undefined,
 ): string {
-  const baseUrl = process.env.NEXT_PUBLIC_MEDIA_BASE_URL;
-
-  if (!baseUrl) {
-    console.warn("NEXT_PUBLIC_MEDIA_BASE_URL is not defined");
-    return "/images/placeholder.jpg";
-  }
-
   if (!image) {
     return "/images/placeholder.jpg";
   }
 
   if (image.formats?.medium) {
-    console.log(`${baseUrl}${image.formats.medium.url}`);
-    return `${baseUrl}${image.formats.medium.url}`;
+    return image.formats.medium.url;
   }
 
   if (image.formats?.small) {
-    return `${baseUrl}${image.formats.small.url}`;
+    return image.formats.small.url;
   }
 
   if (image.url) {
-    return `${baseUrl}${image.url}`;
+    return image.url;
   }
 
   return "/images/placeholder.jpg";
