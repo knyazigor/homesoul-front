@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./SocialLinks.module.scss";
+import { MAX_LINK } from "@/lib/constants";
 
 interface SocialLink {
   name: string;
@@ -45,7 +46,7 @@ export const SocialLinks = ({
     // },
     {
       name: "max",
-      url: "https://max.ru/u/f9LHodD0cOIr8wE3Zw2qXKAK3_M5G6JthcHU2M0NElRpLMLwYAxgriI1AbI",
+      url: MAX_LINK,
       icon: "/images/max-white.svg",
       label: "max",
     },

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import styles from "./pricing.module.scss";
 import { OverlapContainer } from "@/components/ui";
+import { MAX_LINK } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Услуги | Душа вашего дома",
@@ -148,7 +149,9 @@ export default function PricingPage() {
                     ))}
                   </div>
 
-                  <button className={styles.cardButton}>Обсудить проект</button>
+                  <button className={styles.cardButton}>
+                    <a href={MAX_LINK}>Обсудить проект</a>
+                  </button>
                 </article>
               ))}
             </div>

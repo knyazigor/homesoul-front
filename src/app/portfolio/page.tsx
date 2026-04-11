@@ -5,6 +5,7 @@ import { getAllPortfolioProjects } from "@/actions/portfolio";
 import styles from "./portfolio.module.scss";
 import { OverlapContainer } from "@/components/ui";
 import { ScrollToButton } from "@/components/ui/ScrollToButton/ScrollToButton";
+import { MAX_LINK } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Портфолио | Душа вашего дома",
@@ -55,7 +56,9 @@ export default async function PortfolioPage() {
               <h2>Вдохновились нашими работами?</h2>
               <p>Давайте обсудим, как мы можем реализовать ваши идеи в жизнь</p>
               <div className={styles.portfolioCtaActions}>
-                <Link href="/contact">Обсудить проект</Link>
+                <Link href="/contact">
+                  <a href={MAX_LINK}>Обсудить проект</a>
+                </Link>
                 <Link href="/">На главную</Link>
               </div>
             </div>
