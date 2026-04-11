@@ -1,7 +1,7 @@
 import { OptimizedImage, StrapiImage } from "@/lib/types";
 
 export function getOptimizedImageUrl(
-  image: OptimizedImage | StrapiImage | null | undefined
+  image: OptimizedImage | StrapiImage | null | undefined,
 ): string {
   const baseUrl = process.env.NEXT_PUBLIC_MEDIA_BASE_URL;
 
@@ -15,6 +15,7 @@ export function getOptimizedImageUrl(
   }
 
   if (image.formats?.medium) {
+    console.log(`${baseUrl}${image.formats.medium.url}`);
     return `${baseUrl}${image.formats.medium.url}`;
   }
 
@@ -34,7 +35,7 @@ export function getBlurDataUrl(): string {
 }
 
 export function getImageAltText(
-  image: OptimizedImage | StrapiImage | null | undefined
+  image: OptimizedImage | StrapiImage | null | undefined,
 ): string {
   if (!image) {
     return "Изображение проекта";
@@ -44,7 +45,7 @@ export function getImageAltText(
 }
 
 export function getOriginalImageUrl(
-  image: OptimizedImage | StrapiImage | null | undefined
+  image: OptimizedImage | StrapiImage | null | undefined,
 ): string {
   const baseUrl = process.env.NEXT_PUBLIC_MEDIA_BASE_URL;
 
