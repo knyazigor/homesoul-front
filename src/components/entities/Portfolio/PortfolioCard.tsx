@@ -29,6 +29,8 @@ export const PortfolioCard = ({
     href ? styles.hasLink : ""
   } ${className}`;
 
+  console.log("Image URL:", imageUrl);
+
   const cardContent = (
     <article className={cardClassName}>
       <figure className={styles.imageContainer}>
