@@ -33,7 +33,7 @@ export const Footer = () => {
                 pathname === "/personal-data-policy" ? styles.active : ""
               }`}
             >
-              Политика обработки персональных данных
+              Согласие на обработку персональных данных
             </Link>
           </div>
 
