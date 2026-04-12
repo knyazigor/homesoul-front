@@ -1,0 +1,55 @@
+@use '@/styles/variables' as v;
+
+.button {
+  all: unset;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 1rem;
+  font-weight: 600;
+  transition: 0.2s;
+  border: none;
+  background-color: v.$primary;
+  color: v.$text-white;
+  text-align: center;
+}
+
+.wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider {
+  all: unset;
+  display: flex;
+  width: 200%;
+  transition: transform 0.3s ease-in-out;
+  align-items: center;
+  
+  &.showContacts {
+    transform: translateX(-50%);
+  }
+}
+
+.slide {
+  width: 50%;
+  flex-shrink: 0;
+  
+  & > * {
+    padding: 0;
+  }
+}
+
+.contactButtonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: v.$primary;
+  border-radius: 1rem;
+}
+
+.buttonTitle {
+  display: inline-block;
+  margin: 0.2rem;
+}

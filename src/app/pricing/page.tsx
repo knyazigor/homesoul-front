@@ -1,7 +1,8 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import styles from "./pricing.module.scss";
 import { OverlapContainer } from "@/components/ui";
-import { MAX_LINK } from "@/lib/constants";
+import { ContactButton } from "@/components/entities";
 
 export const metadata: Metadata = {
   title: "Услуги | Душа вашего дома",
@@ -27,10 +28,18 @@ const repairProjectFeatures = [
   "Визуализация помещений без мебели",
 ];
 
+const rulerIcon = { src: "/images/ruler.svg", alt: "Ruler" };
+const cartIcon = { src: "/images/cart.svg", alt: "Cart" };
+const premiumIcon = { src: "/images/premium.svg", alt: "Gem" };
+const planIcon = { src: "/images/plan.svg", alt: "Plan" };
+const designIcon = { src: "/images/design.svg", alt: "Brush" };
+
 const pricingPlans = [
   {
     title: "Консультация по планировочному решению",
-    price: "100 ₽/м²",
+    subtitle: "Первые шаги к идеальному дому",
+    price: 100,
+    images: [rulerIcon],
     features: [
       "Обмерный чертеж",
       "Схема демонтажа (при необходимости)",
@@ -41,12 +50,16 @@ const pricingPlans = [
   },
   {
     title: "Проект для ремонта",
-    price: "1 000 ₽/м²",
+    subtitle: "Ремонт без сюрпризов",
+    price: 1000,
+    images: [rulerIcon, planIcon],
     features: repairProjectFeatures,
   },
   {
     title: "Дизайн-проект",
-    price: "2 000 ₽/м²",
+    subtitle: "Ваша мечта в деталях",
+    price: 2000,
+    images: [rulerIcon, planIcon, designIcon],
     includes: {
       title: "Всё из пакета «Проект для ремонта»",
       items: repairProjectFeatures,
@@ -58,7 +71,9 @@ const pricingPlans = [
   },
   {
     title: "Дизайн-проект с комплектацией",
-    price: "2 500 ₽/м²",
+    subtitle: "Список покупок готов",
+    price: 2500,
+    images: [rulerIcon, planIcon, designIcon, cartIcon],
     includes: {
       title: "Всё из пакета «Дизайн-проект»",
       items: [
@@ -73,7 +88,9 @@ const pricingPlans = [
   },
   {
     title: "Дизайн-проект под ключ",
-    price: "4 000 ₽/м²",
+    subtitle: "От идеи до финального штриха",
+    price: 4000,
+    images: [rulerIcon, planIcon, designIcon, cartIcon, premiumIcon],
     includes: {
       title: "Всё из пакета «Дизайн-проект с комплектацией»",
       items: [
@@ -95,13 +112,14 @@ export default function PricingPage() {
       {/* Hero секция */}
       <section className={styles.pricingHero}>
         <div className={styles.heroBackground}>
-          <div className={styles.heroGradient} />
-          <div className={styles.heroContent}>
-            <div className={styles.heroText}>
-              <h1 className={styles.heroTitle}>Пакеты услуг</h1>
-              <p className={styles.heroSubtitle}>
-                Выберите оптимальный формат сотрудничества для вашего проекта
-              </p>
+          <div className={styles.heroGradient}>
+            <div className={styles.heroContent}>
+              <div className={styles.heroText}>
+                <h1 className={styles.heroTitle}>Пакеты услуг</h1>
+                <p className={styles.heroSubtitle}>
+                  Выберите оптимальный формат сотрудничества для вашего проекта
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -116,7 +134,23 @@ export default function PricingPage() {
                 <article key={index} className={styles.pricingCard}>
                   <div className={styles.cardHeader}>
                     <h2 className={styles.cardTitle}>{plan.title}</h2>
-                    <div className={styles.cardPrice}>{plan.price}</div>
+                    <h3 className={styles.cardSubtitle}>{plan.subtitle}</h3>
+                    <div className={styles.cardPrice}>
+                      <span>{plan.price.toLocaleString("ru-RU")}</span>
+                      <span className={styles.currency}>₽/м²</span>
+                    </div>
+                    <div className={styles.iconsContainer}>
+                      {plan.images.map((image) => (
+                        <Image
+                          key={image.src}
+                          src={image.src}
+                          alt={image.alt}
+                          width={24}
+                          height={24}
+                          className={styles.icon}
+                        />
+                      ))}
+                    </div>
                   </div>
 
                   <div className={styles.cardFeatures}>
@@ -149,9 +183,7 @@ export default function PricingPage() {
                     ))}
                   </div>
 
-                  <button className={styles.cardButton}>
-                    <a href={MAX_LINK}>Обсудить проект</a>
-                  </button>
+                  <ContactButton title="Обсудить проект" />
                 </article>
               ))}
             </div>

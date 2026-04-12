@@ -3,9 +3,9 @@ import Link from "next/link";
 import { PortfolioGrid } from "@/components/entities/Portfolio/PortfolioGrid";
 import { getAllPortfolioProjects } from "@/actions/portfolio";
 import styles from "./portfolio.module.scss";
-import { OverlapContainer } from "@/components/ui";
+import { Button, OverlapContainer } from "@/components/ui";
 import { ScrollToButton } from "@/components/ui/ScrollToButton/ScrollToButton";
-import { MAX_LINK } from "@/lib/constants";
+import { ContactButton } from "@/components/entities";
 
 export const metadata: Metadata = {
   title: "Портфолио | Душа вашего дома",
@@ -35,9 +35,9 @@ export default async function PortfolioPage() {
                   <ScrollToButton targetId="projects-section">
                     Проекты
                   </ScrollToButton>
-                  <ScrollToButton targetId="projects-section" variant="outline">
-                    Цены
-                  </ScrollToButton>
+                  <Link href="/pricing">
+                    <Button variant="outline">Цены</Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -56,9 +56,7 @@ export default async function PortfolioPage() {
               <h2>Вдохновились нашими работами?</h2>
               <p>Давайте обсудим, как мы можем реализовать ваши идеи в жизнь</p>
               <div className={styles.portfolioCtaActions}>
-                <Link href="/contact">
-                  <a href={MAX_LINK}>Обсудить проект</a>
-                </Link>
+                <ContactButton title="Обсудить проект" />
                 <Link href="/">На главную</Link>
               </div>
             </div>

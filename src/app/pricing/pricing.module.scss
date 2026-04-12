@@ -45,9 +45,13 @@
 }
 
 .heroContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   z-index: 2;
   width: 100%;
+  height: 100%;
   color: white;
 }
 
@@ -102,6 +106,7 @@
 }
 
 .pricingCard {
+  position: relative;
   background: v.$background;
   border-radius: 12px;
   padding: 2rem;
@@ -119,25 +124,41 @@
 
 .cardHeader {
   margin-bottom: 1.5rem;
-  text-align: center;
+  text-align: start;
   border-bottom: 1px solid v.$border;
   padding-bottom: 1.5rem;
 }
 
 .cardTitle {
-  font-family: v.$font-primary;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.4rem;
   margin-bottom: 0.5rem;
   color: v.$text-dark;
 }
 
-.cardPrice {
+.cardSubtitle {
   font-family: v.$font-secondary;
-  font-size: 2rem;
-  font-weight: 700;
-  color: v.$accent;
+  font-size: 0.8rem;
+  color: v.$text-light;
 }
+
+.cardPrice {
+  display: inline-flex;
+  gap: 0.2rem;
+  align-items: center;
+  font-family: v.$font-secondary;  
+  color: v.$text-white;
+  position: absolute;
+  top: -1rem;
+  right: 1rem;
+  padding: 0.2rem 2rem;
+  background-color: v.$accent;
+  font-weight: 400;
+  border-radius: 0.5rem;
+}
+
+.currency {
+    font-size: 0.8rem;
+  }
 
 .cardFeatures {
   display: flex;
@@ -239,4 +260,9 @@
   &:hover {
     background: darken(v.$primary, 10%);
   }
+}
+
+.iconsContainer {
+  display: flex;
+  gap: 0.2rem;
 }

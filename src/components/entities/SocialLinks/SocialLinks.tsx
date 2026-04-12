@@ -28,7 +28,7 @@ export const SocialLinks = ({
   const socialLinks: SocialLink[] = [
     {
       name: "telegram",
-      url: "t.me/dusha_vashegodoma",
+      url: "https://t.me/dusha_vashegodoma",
       icon: "/images/telegram-logo-white.svg",
       label: "Telegram",
     },
@@ -58,6 +58,12 @@ export const SocialLinks = ({
     large: styles.large,
   };
 
+  const imageSizes = {
+    small: 24,
+    medium: 32,
+    large: 40,
+  };
+
   return (
     <div
       className={`${styles.socialLinks} ${styles[variant]} ${sizeClasses[size]} ${className}`}
@@ -76,8 +82,8 @@ export const SocialLinks = ({
             <Image
               src={social.icon}
               alt={social.label}
-              width={32}
-              height={32}
+              width={imageSizes[size]}
+              height={imageSizes[size]}
               className={styles.icon}
             />
           </div>
