@@ -59,7 +59,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 0 1rem;
-  text-align: center;
+  // text-align: right;
 }
 
 .heroTitle {
@@ -265,4 +265,8 @@
 .iconsContainer {
   display: flex;
   gap: 0.2rem;
+}
+
+.disclaimer {
+  margin-bottom: 2rem;
 }

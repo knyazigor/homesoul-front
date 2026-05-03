@@ -136,6 +136,7 @@ export default function PricingPage() {
                     <h2 className={styles.cardTitle}>{plan.title}</h2>
                     <h3 className={styles.cardSubtitle}>{plan.subtitle}</h3>
                     <div className={styles.cardPrice}>
+                      <span>от</span>
                       <span>{plan.price.toLocaleString("ru-RU")}</span>
                       <span className={styles.currency}>₽/м²</span>
                     </div>
@@ -183,10 +184,15 @@ export default function PricingPage() {
                     ))}
                   </div>
 
-                  <ContactButton title="Обсудить проект" />
+                  <ContactButton>Обсудить проект</ContactButton>
                 </article>
               ))}
             </div>
+            <p className={styles.disclaimer}>
+              Стоимость услуг указана ориентировочно для полного пакета
+              дизайн-проекта. Точный расчет производится после получения
+              технического задания
+            </p>
           </div>
         </section>
       </OverlapContainer>

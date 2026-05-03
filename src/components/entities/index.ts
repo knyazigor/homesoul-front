@@ -1,2 +1,2 @@
 export * from "./Portfolio";
-export * from "./SocialLinks";
+export * from "./ContactLinks";

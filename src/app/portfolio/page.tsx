@@ -53,11 +53,12 @@ export default async function PortfolioPage() {
         <section className={styles.portfolioCta}>
           <div className="container">
             <div className={styles.portfolioCtaContent}>
-              <h2>Вдохновились нашими работами?</h2>
               <p>Давайте обсудим, как мы можем реализовать ваши идеи в жизнь</p>
               <div className={styles.portfolioCtaActions}>
-                <ContactButton title="Обсудить проект" />
-                <Link href="/">На главную</Link>
+                <ContactButton>Обсудить проект</ContactButton>
+                <Button>
+                  <Link href="/">На главную</Link>
+                </Button>
               </div>
             </div>
           </div>

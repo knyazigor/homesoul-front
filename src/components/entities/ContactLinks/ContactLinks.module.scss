@@ -1,0 +1,314 @@
+@use '@/styles/variables' as v;
+
+.contactLinks {
+  display: flex;
+  flex-direction: column;
+  // gap: 1rem;
+  width: 100%;
+
+  // &.minimal {
+  //   gap: 0.75rem;
+  // }
+
+  &.rounded {
+    .contactLink {
+      border-radius: 50%;
+      background: rgba(v.$accent, 0.1);
+      
+      &:hover {
+        background: rgba(v.$accent, 0.2);
+      }
+    }
+  }
+
+  &.column {
+    .group {
+      width: 100%;
+    }
+
+    .groupTitle {
+      font-family: v.$font-secondary;
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: v.$text-light;
+      margin-bottom: 0.5rem;
+      padding-left: 0.25rem;
+    }
+
+    .groupContent {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contactLink {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.4rem 0.75rem;
+      background-color: v.$primary;
+      border-radius: 10px;
+      width: 100%;
+      justify-content: flex-start;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: v.$primary-dark;
+        transform: translateX(4px);
+      }
+
+      &:active {
+        transform: translateX(2px);
+      }
+    }
+
+    .iconWrapper {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(v.$text-white, 0.2);
+      border-radius: 8px;
+    }
+
+    .icon {
+      filter: brightness(0) invert(1);
+    }
+
+    .label {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      color: v.$text-white;
+      opacity: 1;
+    }
+
+    &.disabled {
+      .contactLink {
+        opacity: 0.5;
+        pointer-events: none;
+        background-color: v.$primary;
+        
+        &:hover {
+          transform: none;
+          background-color: v.$primary;
+        }
+      }
+    }
+  }
+}
+
+.contactLinks.disabled {
+  .contactLink {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    
+    &:hover {
+      background: transparent;
+      transform: none;
+    }
+  }
+}
+
+.contactLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  background-color: v.$accent;
+  color: v.$background;
+  transition: all 0.2s ease;
+  padding: 0.2rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(v.$accent, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$primary;
+    outline-offset: 2px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .minimal & {
+    padding: 0.25rem;
+    
+    &:hover {
+      background: transparent;
+      opacity: 0.8;
+      transform: none;
+    }
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .rounded & {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.icon {
+  transition: transform 0.2s ease;
+  
+  .contactLink:hover & {
+    transform: scale(1.1);
+  }
+
+  .minimal & {
+    filter: brightness(0) invert(1);
+  }
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 400;
+  opacity: 0.9;
+  
+  .minimal & {
+    display: none;
+  }
+}
+
+.small.contactLinks.column {
+  .groupTitle {
+    font-size: 0.65rem;
+  }
+  
+  .contactLink {
+    padding: 0.3rem 0.6rem;
+  }
+  
+  .iconWrapper {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .label {
+    font-size: 0.7rem;
+  }
+}
+
+.medium.contactLinks.column {
+  .contactLink {
+    padding: 0.4rem 0.75rem;
+  }
+  
+  .iconWrapper {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .label {
+    font-size: 0.8rem;
+  }
+}
+
+.large.contactLinks.column {
+  .contactLink {
+    padding: 0.5rem 0.875rem;
+  }
+  
+  .iconWrapper {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .label {
+    font-size: 0.9rem;
+  }
+}
+
+.small {
+  .icon {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .rounded .iconWrapper {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.medium {
+  .icon {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .rounded .iconWrapper {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.large {
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .rounded .iconWrapper {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .label {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: v.$tablet) {
+  .contactLinks {
+    gap: 0.75rem;
+  }
+  
+  .label {
+    font-size: 0.85rem;
+  }
+  
+  .contactLinks.column {
+    .contactLink {
+      padding: 0.35rem 0.7rem;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contactLink,
+  .icon {
+    transition: none;
+  }
+  
+  .contactLink:hover {
+    transform: none;
+  }
+}

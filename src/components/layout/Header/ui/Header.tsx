@@ -6,12 +6,13 @@ import { usePathname } from "next/navigation";
 import styles from "./Header.module.scss";
 import Image from "next/image";
 import { useHeaderScroll } from "../hooks/useHeaderScroll";
-import { SocialLinks } from "@/components/entities";
 import { BurgerMenuButton } from "../ui/BurgerMenuButton";
+import { useModal } from "@/components/providers/ModalProvider";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { openContactsModal } = useModal();
 
   const { /* isVisible, */ isScrolled } = useHeaderScroll({
     hideThreshold: 100,
@@ -51,7 +52,7 @@ export const Header = () => {
     { href: "/", label: "Главная" },
     { href: "/portfolio", label: "Портфолио" },
     { href: "/pricing", label: "Тарифы" },
-    { href: "/contact", label: "Контакты" },
+    { href: "#", label: "Контакты", isModal: true },
   ];
 
   const isActiveLink = (href: string) => {
@@ -61,21 +62,39 @@ export const Header = () => {
     return pathname.startsWith(href);
   };
 
-  // Обработчик клика по ссылке в мобильном меню
   const handleMobileLinkClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>) => {
-      e.preventDefault();
-      const href = e.currentTarget.getAttribute("href");
-      closeMobileMenu();
-
-      // Небольшая задержка для анимации закрытия меню
-      setTimeout(() => {
-        if (href) {
-          window.location.href = href;
-        }
-      }, 300);
+    (
+      e: React.MouseEvent<HTMLAnchorElement>,
+      href: string,
+      isModal?: boolean,
+    ) => {
+      if (isModal) {
+        e.preventDefault();
+        closeMobileMenu();
+        setTimeout(() => {
+          openContactsModal();
+        }, 300);
+      } else {
+        e.preventDefault();
+        closeMobileMenu();
+        setTimeout(() => {
+          if (href) {
+            window.location.href = href;
+          }
+        }, 300);
+      }
     },
-    [closeMobileMenu]
+    [closeMobileMenu, openContactsModal],
+  );
+
+  const handleDesktopLinkClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, isModal?: boolean) => {
+      if (isModal) {
+        e.preventDefault();
+        openContactsModal();
+      }
+    },
+    [openContactsModal],
   );
 
   return (
@@ -109,6 +128,7 @@ export const Header = () => {
                 className={`${styles.navLink} ${
                   isActiveLink(item.href) ? styles.active : ""
                 }`}
+                onClick={(e) => handleDesktopLinkClick(e, item.isModal)}
               >
                 {item.label}
               </Link>
@@ -139,16 +159,12 @@ export const Header = () => {
               className={`${styles.mobileNavLink} ${
                 isActiveLink(item.href) ? styles.active : ""
               }`}
-              onClick={handleMobileLinkClick}
+              onClick={(e) => handleMobileLinkClick(e, item.href, item.isModal)}
             >
               {item.label}
             </Link>
           ))}
         </nav>
-
-        <div className={styles.mobileSocialLinks}>
-          <SocialLinks variant="rounded" size="small" showLabels={false} />
-        </div>
       </div>
     </>
   );

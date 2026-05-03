@@ -3,12 +3,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Footer.module.scss";
-import { SocialLinks } from "@/components/entities";
 import { Phone, Mail } from "lucide-react";
+import { useModal } from "@/components/providers/ModalProvider";
 
 export const Footer = () => {
   const pathname = usePathname();
   const currentYear = new Date().getFullYear();
+  const { openContactsModal } = useModal();
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    openContactsModal();
+  };
 
   return (
     <footer className={styles.footer}>
@@ -16,6 +22,7 @@ export const Footer = () => {
         <div className={styles.footerContent}>
           <div className={styles.copyright}>
             <p>© {currentYear} Квашнина Полина Владимировна</p>
+            <p>ИНН 027313215899</p>
           </div>
 
           <div className={styles.links}>
@@ -40,8 +47,11 @@ export const Footer = () => {
           <div className={styles.contacts}>
             <div className={styles.contactItem}>
               <Phone size={18} className={styles.contactIcon} />
-
-              <a href="tel:+79899594457" className={styles.contactLink}>
+              <a
+                href="tel:+79899594457"
+                className={styles.contactLink}
+                onClick={handleContactClick}
+              >
                 +7 (989) 959-44-57
               </a>
             </div>
@@ -51,13 +61,10 @@ export const Footer = () => {
               <a
                 href="mailto:kvashninapv@gmail.com"
                 className={styles.contactLink}
+                onClick={handleContactClick}
               >
                 kvashninapv@gmail.com
               </a>
-            </div>
-
-            <div className={styles.socialSection}>
-              <SocialLinks variant="rounded" size="medium" showLabels={false} />
             </div>
           </div>
         </div>
@@ -74,7 +81,7 @@ export const Footer = () => {
             публичной офертой
           </p>
           <p className={styles.disclaimer}>
-            Деятельность компании Meta (владелец социальных сетей Instagram,
+            * Деятельность компании Meta (владелец социальных сетей Instagram,
             Facebook и мессенджера WhatsApp) признана экстремистской и запрещена
             на территории РФ
           </p>

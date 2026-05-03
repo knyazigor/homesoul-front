@@ -1,2 +1,2 @@
-export { SocialLinks } from "./SocialLinks";
+export { ContactLinks } from "./ContactLinks";
 export { ContactButton } from "./ContactButton";

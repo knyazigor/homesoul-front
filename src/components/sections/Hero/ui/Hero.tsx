@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./Hero.module.scss";
 import { Button } from "@/components/ui";
 import Link from "next/link";
-import { MAX_LINK } from "@/lib/constants";
+import { ContactButton } from "@/components/entities";
 
 export const Hero = () => {
   return (
@@ -35,9 +35,9 @@ export const Hero = () => {
 
       <div className={styles.heroBottom}>
         <div className={styles.heroCtas}>
-          <Button variant="secondary" width={300}>
-            <a href={MAX_LINK}>Обсудить проект</a>
-          </Button>
+          <ContactButton variant="secondary" width={300}>
+            Обсудить проект
+          </ContactButton>
           <Link href="/portfolio">
             <Button variant="secondary" width={300}>
               Посмотреть работы

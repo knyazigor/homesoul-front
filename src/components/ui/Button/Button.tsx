@@ -1,7 +1,7 @@
 import { FC, ButtonHTMLAttributes, ReactNode } from "react";
 import styles from "./Button.module.scss";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline" | "ghost";
   size?: "small" | "medium" | "large";
   children?: ReactNode;
