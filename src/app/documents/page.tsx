@@ -49,6 +49,7 @@ export default async function DocumentsPage() {
               <div className={styles.heroText}>
                 <h1 className={styles.heroTitle}>Документы и договоры</h1>
                 <h2>{process.env.BASE_URL}</h2>
+                <h2>{JSON.stringify(documents)}</h2>
               </div>
             </div>
           </div>
