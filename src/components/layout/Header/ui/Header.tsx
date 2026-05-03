@@ -52,6 +52,7 @@ export const Header = () => {
     { href: "/", label: "Главная" },
     { href: "/portfolio", label: "Портфолио" },
     { href: "/pricing", label: "Тарифы" },
+    { href: "/documents", label: "Документы" },
     { href: "#", label: "Контакты", isModal: true },
   ];
 

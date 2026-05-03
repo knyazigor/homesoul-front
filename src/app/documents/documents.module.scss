@@ -1,0 +1,259 @@
+// src/app/documents/documents.module.scss
+@use '@/styles/variables' as v;
+
+.documentsPage {
+  min-height: 100vh;
+}
+
+// Hero секция
+.documentsHero {
+  position: relative;
+  height: 50vh;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(24, 24, 26, 0.85) 0%,
+    rgba(24, 24, 26, 0.7) 50%,
+    rgba(24, 24, 26, 0.85) 100%
+  );
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.heroText {
+  max-width: 800px;
+}
+
+.heroTitle {
+  font-family: v.$font-primary;
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;  
+  color: rgba(255, 255, 255, 0.9);
+  
+  @media (max-width: v.$tablet) {
+    font-size: 3rem;
+  }
+  
+  @media (max-width: v.$mobile) {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.heroSubtitle {
+  font-family: v.$font-secondary;
+  font-size: 1.25rem;
+  color: rgba(v.$text-white, 0.9);
+  line-height: 1.5;
+  
+  @media (max-width: v.$mobile) {
+    font-size: 1rem;
+  }
+}
+
+// Основной контент
+.documentsMain {
+  padding: 4rem 0;
+  
+  @media (max-width: v.$mobile) {
+    padding: 2rem 0;
+  }
+}
+
+.documentsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.documentCard {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: v.$surface;
+  border: 1px solid v.$border;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-color: v.$primary;
+  }
+  
+  @media (max-width: v.$mobile) {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+.cardIcon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(v.$primary, 0.1);
+  border-radius: 1rem;
+  
+  @media (max-width: v.$mobile) {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.cardContent {
+  flex: 1;
+  
+  @media (max-width: v.$mobile) {
+    text-align: center;
+  }
+}
+
+.cardTitle {
+  font-family: v.$font-primary;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: v.$text-dark;
+  margin-bottom: 0.5rem;
+  
+  @media (max-width: v.$mobile) {
+    font-size: 1.125rem;
+  }
+}
+
+.cardDescription {
+  font-family: v.$font-secondary;
+  font-size: 0.875rem;
+  color: v.$text-light;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.fileInfo {
+  display: flex;
+  gap: 1rem;
+  font-family: v.$font-secondary;
+  font-size: 0.75rem;
+  color: v.$text-light;
+  
+  @media (max-width: v.$mobile) {
+    justify-content: center;
+  }
+}
+
+.fileName {
+  opacity: 0.8;
+}
+
+.fileSize {
+  opacity: 0.6;
+}
+
+.cardAction {
+  flex-shrink: 0;
+}
+
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background-color: v.$primary;
+  color: v.$text-white;
+  font-family: v.$font-secondary;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  
+  &:hover {
+    background-color: v.$primary-dark;
+    transform: translateY(-1px);
+  }
+  
+  svg {
+    transition: transform 0.2s ease;
+  }
+  
+  &:hover svg {
+    transform: translateY(2px);
+  }
+  
+  @media (max-width: v.$mobile) {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-family: v.$font-secondary;
+  font-size: 1.125rem;
+  color: v.$text-light;
+  background: v.$surface;
+  border-radius: 1rem;
+  border: 1px solid v.$border;
+}
+
+.emptySubtitle {
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  opacity: 0.7;
+}
+
+.disclaimer {
+  text-align: center;
+  font-family: v.$font-secondary;
+  font-size: 0.75rem;
+  color: v.$text-light;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid v.$border;
+  opacity: 0.7;
+  
+  @media (max-width: v.$mobile) {
+    font-size: 0.7rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+}

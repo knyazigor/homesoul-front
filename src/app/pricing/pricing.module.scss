@@ -268,5 +268,19 @@
 }
 
 .disclaimer {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-family: v.$font-secondary;
+  font-size: 0.75rem;
+  color: v.$text-light;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid v.$border;
+  opacity: 0.7;
+  
+  @media (max-width: v.$mobile) {
+    font-size: 0.7rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
 }

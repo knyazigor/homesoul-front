@@ -2,6 +2,8 @@ import {
   StrapiResponse,
   PortfolioProject,
   StrapiItemResponse,
+  Document,
+  StrapiDocumentResponse,
 } from "@/lib/types";
 
 interface PortfolioQueryOptions {
@@ -62,7 +64,6 @@ class StrapiClient {
       const queryParams = new URLSearchParams();
       queryParams.append("populate", "*");
 
-      // Фильтр по displayOnMainPage
       if (options?.displayOnMainPage !== undefined) {
         queryParams.append(
           "filters[displayOnMainPage][$eq]",
@@ -70,7 +71,6 @@ class StrapiClient {
         );
       }
 
-      // Фильтр по featured (если нужно)
       if (options?.featured !== undefined) {
         queryParams.append(
           "filters[featured][$eq]",
@@ -78,18 +78,15 @@ class StrapiClient {
         );
       }
 
-      // Фильтр по категории (если нужно)
       if (options?.category) {
         queryParams.append("filters[category][$eq]", options.category);
       }
 
-      // Сортировка
       if (options?.sortBy) {
         const sortOrder = options.sortOrder === "desc" ? "desc" : "asc";
         queryParams.append("sort", `${options.sortBy}:${sortOrder}`);
       }
 
-      // Лимит
       if (options?.limit) {
         queryParams.append("pagination[pageSize]", options.limit.toString());
       }
@@ -133,6 +130,91 @@ class StrapiClient {
       return response.data || null;
     } catch (error) {
       console.error(`Failed to fetch portfolio project ${id}:`, error);
+      return null;
+    }
+  }
+
+  /**
+   * Получение всех документов из коллекции docs
+   */
+  async getAllDocuments(): Promise<Document[]> {
+    try {
+      // Строим URL с параметрами
+      const queryParams = new URLSearchParams();
+      queryParams.append("populate", "file");
+      queryParams.append("sort", "order:asc");
+      queryParams.append("pagination[pageSize]", "100");
+
+      const response = await this.fetchFromStrapi<{
+        data: StrapiDocumentResponse[];
+      }>(`/docs?${queryParams.toString()}`);
+
+      if (!response.data) {
+        return [];
+      }
+
+      return response.data.map((item) => ({
+        id: item.id,
+        documentId: item.documentId,
+        title: item.title,
+        description: item.description,
+        order: item.order,
+        file: item.file
+          ? {
+              id: item.file.id,
+              url: item.file.url,
+              name: item.file.name,
+              size: item.file.size,
+              mime: item.file.mime,
+              ext: item.file.ext,
+            }
+          : null,
+        publishedAt: item.publishedAt,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
+      }));
+    } catch (error) {
+      console.error("Error fetching documents:", error);
+      return [];
+    }
+  }
+
+  /**
+   * Получение одного документа по ID из коллекции docs
+   */
+  async getDocument(id: string | number): Promise<Document | null> {
+    try {
+      const response = await this.fetchFromStrapi<{
+        data: StrapiDocumentResponse;
+      }>(`/docs/${id}?populate=file`);
+
+      if (!response.data) {
+        return null;
+      }
+
+      const item = response.data;
+      return {
+        id: item.id,
+        documentId: item.documentId,
+        title: item.title,
+        description: item.description,
+        order: item.order,
+        file: item.file
+          ? {
+              id: item.file.id,
+              url: item.file.url,
+              name: item.file.name,
+              size: item.file.size,
+              mime: item.file.mime,
+              ext: item.file.ext,
+            }
+          : null,
+        publishedAt: item.publishedAt,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
+      };
+    } catch (error) {
+      console.error(`Error fetching document ${id}:`, error);
       return null;
     }
   }
