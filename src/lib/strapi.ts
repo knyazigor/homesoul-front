@@ -34,10 +34,6 @@ class StrapiClient {
       "Content-Type": "application/json",
     };
 
-    console.log("🌐 [fetchFromStrapi] Request URL:", url);
-    console.log("🌐 [fetchFromStrapi] Base URL:", this.baseUrl);
-    console.log("🌐 [fetchFromStrapi] Endpoint:", endpoint);
-
     if (this.apiToken) {
       headers["Authorization"] = `Bearer ${this.apiToken}`;
       console.log("🌐 [fetchFromStrapi] Using API token");
@@ -190,7 +186,6 @@ class StrapiClient {
         updatedAt: item.updatedAt,
       }));
 
-      console.log("✅ [getAllDocuments] Return documents:", documents.length);
       return documents;
     } catch (error) {
       console.error("❌ [getAllDocuments] Error:", error);
