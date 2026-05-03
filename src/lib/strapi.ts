@@ -34,10 +34,13 @@ class StrapiClient {
       "Content-Type": "application/json",
     };
 
-    console.log("🔗 Strapi Request URL:", url);
+    console.log("🌐 [fetchFromStrapi] Request URL:", url);
+    console.log("🌐 [fetchFromStrapi] Base URL:", this.baseUrl);
+    console.log("🌐 [fetchFromStrapi] Endpoint:", endpoint);
 
     if (this.apiToken) {
       headers["Authorization"] = `Bearer ${this.apiToken}`;
+      console.log("🌐 [fetchFromStrapi] Using API token");
     }
 
     const response = await fetch(url, {
@@ -48,15 +51,18 @@ class StrapiClient {
       },
     });
 
+    console.log("🌐 [fetchFromStrapi] Response status:", response.status);
+
     if (!response.ok) {
-      throw new Error(
-        `Strapi API error: ${response.status} ${response.statusText} URL: ${this.baseUrl}${endpoint}`,
+      console.error(
+        "🌐 [fetchFromStrapi] Error!",
+        response.status,
+        response.statusText,
       );
     }
 
     return response.json();
   }
-
   async getPortfolioProjects(
     options?: PortfolioQueryOptions,
   ): Promise<PortfolioProject[]> {
@@ -138,22 +144,32 @@ class StrapiClient {
    * Получение всех документов из коллекции docs
    */
   async getAllDocuments(): Promise<Document[]> {
+    console.log("📄 [getAllDocuments] START");
+
     try {
-      // Строим URL с параметрами
       const queryParams = new URLSearchParams();
       queryParams.append("populate", "file");
       queryParams.append("sort", "order:asc");
       queryParams.append("pagination[pageSize]", "100");
 
+      const endpoint = `/docs?${queryParams.toString()}`;
+      console.log("📄 [getAllDocuments] Endpoint:", endpoint);
+
       const response = await this.fetchFromStrapi<{
         data: StrapiDocumentResponse[];
-      }>(`/docs?${queryParams.toString()}`);
+      }>(endpoint);
+
+      console.log(
+        "📄 [getAllDocuments] Response data length:",
+        response.data?.length,
+      );
 
       if (!response.data) {
+        console.log("📄 [getAllDocuments] No data in response");
         return [];
       }
 
-      return response.data.map((item) => ({
+      const documents = response.data.map((item) => ({
         id: item.id,
         documentId: item.documentId,
         title: item.title,
@@ -173,12 +189,14 @@ class StrapiClient {
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,
       }));
+
+      console.log("✅ [getAllDocuments] Return documents:", documents.length);
+      return documents;
     } catch (error) {
-      console.error("Error fetching documents:", error);
+      console.error("❌ [getAllDocuments] Error:", error);
       return [];
     }
   }
-
   /**
    * Получение одного документа по ID из коллекции docs
    */

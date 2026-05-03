@@ -10,7 +10,21 @@ import { Document } from "@/lib/types/document";
  */
 export const getAllDocuments = unstable_cache(
   async (): Promise<Document[]> => {
-    return await strapiClient.getAllDocuments();
+    console.log("🔍 [getAllDocuments] START");
+    console.log("🔍 [getAllDocuments] BASE_URL:", process.env.BASE_URL);
+    console.log(
+      "🔍 [getAllDocuments] NEXT_PUBLIC_STRAPI_URL:",
+      process.env.NEXT_PUBLIC_STRAPI_URL,
+    );
+
+    try {
+      const documents = await strapiClient.getAllDocuments();
+      console.log("✅ [getAllDocuments] Count:", documents.length);
+      return documents;
+    } catch (error) {
+      console.error("❌ [getAllDocuments] Error:", error);
+      return [];
+    }
   },
   ["all-documents"],
   {
@@ -18,7 +32,6 @@ export const getAllDocuments = unstable_cache(
     tags: ["documents"],
   },
 );
-
 /**
  * Получение документа по ID
  */

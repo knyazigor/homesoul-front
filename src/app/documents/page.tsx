@@ -27,7 +27,17 @@ const formatFileSize = (bytes: number): string => {
 };
 
 export default async function DocumentsPage() {
+  console.log("🖼️ [DocumentsPage] Render START");
+  console.log(
+    "🖼️ [DocumentsPage] NEXT_PUBLIC_STRAPI_URL:",
+    process.env.NEXT_PUBLIC_STRAPI_URL,
+  );
+  console.log("🖼️ [DocumentsPage] BASE_URL:", process.env.BASE_URL);
+
   const documents = await getAllDocuments();
+
+  console.log("🖼️ [DocumentsPage] Received documents:", documents.length);
+  console.log("🖼️ [DocumentsPage] First document title:", documents[0]?.title);
 
   return (
     <main className={styles.documentsPage}>
