@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.scss";
 import { Footer, Header } from "@/components/layout";
 import { ModalProvider } from "@/components/providers/ModalProvider";
+import { CookieBanner } from "@/components/modals";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <CookieBanner />
         </ModalProvider>
       </body>
     </html>

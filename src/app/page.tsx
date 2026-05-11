@@ -3,6 +3,8 @@ import styles from "./page.module.scss";
 import { Hero } from "@/components/sections";
 import { Portfolio } from "@/components/sections/Portfolio/ui/Portfolio";
 import { getMainPagePortfolioProjects } from "@/actions/portfolio";
+import { Button } from "@/components/ui";
+import Link from "next/link";
 
 export default async function Home() {
   const projects = await getMainPagePortfolioProjects();

@@ -2,15 +2,15 @@
 
 /* Портфолио */
 .portfolio {
-  padding: 3rem 0;
+  padding: 1rem 0;
   background: v.$background;
 }
 
 .portfolio h2 {
   font-family: v.$font-primary;
-  font-size: 2.5rem;
+  font-size: 2rem;
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   color: v.$accent;
 }
 
@@ -60,3 +60,10 @@
   opacity: 0.9;
 }
 
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}

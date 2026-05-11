@@ -65,7 +65,7 @@ export const Pricing = () => {
     <section className={styles.pricing}>
       <div className="container">
         <div className={styles.header}>
-          <h2>Тарифы</h2>
+          <h2>Пакеты услуг</h2>
           <p className={styles.subtitle}>
             Прозрачное ценообразование за квадратный метр. Выберите подходящий
             вариант для вашего проекта.

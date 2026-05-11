@@ -51,7 +51,7 @@ export const Header = () => {
   const navItems = [
     { href: "/", label: "Главная" },
     { href: "/portfolio", label: "Портфолио" },
-    { href: "/pricing", label: "Тарифы" },
+    { href: "/pricing", label: "Пакеты услуг" },
     { href: "/documents", label: "Документы" },
     { href: "#", label: "Контакты", isModal: true },
   ];
