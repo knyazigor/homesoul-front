@@ -67,7 +67,7 @@ export default async function DocumentsPage() {
                     : { src: "/images/file.svg", alt: "File" };
 
                   const fileUrl = doc.file
-                    ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${doc.file.url}`
+                    ? `${process.env.NEXT_PUBLIC_MEDIA_BASE_URL ?? "https://api.dushavashegodoma.ru/"}${doc.file.url}`
                     : "#";
 
                   return (
