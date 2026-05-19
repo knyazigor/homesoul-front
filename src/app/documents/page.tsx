@@ -4,6 +4,7 @@ import styles from "./documents.module.scss";
 import { OverlapContainer } from "@/components/ui";
 import { getAllDocuments } from "@/actions/documents";
 import { Document } from "@/lib/types/document";
+import { MEDIA_LINK } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Документы и договоры | Душа вашего дома",
@@ -67,7 +68,7 @@ export default async function DocumentsPage() {
                     : { src: "/images/file.svg", alt: "File" };
 
                   const fileUrl = doc.file
-                    ? `${process.env.NEXT_PUBLIC_MEDIA_BASE_URL ?? "https://api.dushavashegodoma.ru/"}${doc.file.url}`
+                    ? `${process.env.NEXT_PUBLIC_MEDIA_BASE_URL ?? MEDIA_LINK}${doc.file.url}`
                     : "#";
 
                   return (
