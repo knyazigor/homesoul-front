@@ -24,8 +24,6 @@ const repairProjectFeatures = [
   "Схема потолков",
   "Схема напольных покрытий",
   "Схема монтажа напольных плинтусов",
-  "Развертки стен без мебели",
-  "Визуализация помещений без мебели",
 ];
 
 const rulerIcon = { src: "/images/ruler.svg", alt: "Ruler" };
@@ -53,7 +51,11 @@ const pricingPlans = [
     subtitle: "Ремонт без сюрпризов",
     price: 1000,
     images: [rulerIcon, planIcon],
-    features: repairProjectFeatures,
+    features: [
+      ...repairProjectFeatures,
+      "Развертки стен без мебели",
+      "Визуализация помещений без мебели",
+    ],
   },
   {
     title: "Дизайн-проект",
